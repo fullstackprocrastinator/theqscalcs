@@ -4,18 +4,48 @@
             --light: #ecf0f1;
         }
 
-            header {
-                position: relative;
-                background: linear-gradient(135deg, var(--primary), var(--secondary));
-                color: white;
-                padding: 6rem 2rem;
-                margin-bottom: 2rem;
-                text-align: center;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                min-height: 300px;
+            .creator-note {
+            position: absolute;
+            top: 1rem;
+            right: 2rem;
+            color: rgba(255,255,255,0.9);
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+        
+        .creator-note a {
+            color: var(--light);
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .creator-note a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+
+                .last-updated {
+            text-align: center;
+            color: rgba(255,255,255,0.9);
+            font-size: 0.9rem;
+            font-weight: 300;
+            margin-top: 1rem;
+        }
+        
+        /* Add position: relative to the header */
+        header {
+            position: relative;
+            /* existing styles remain */
+        }
+        
+        /* Optional: Mobile adjustment */
+        @media (max-width: 768px) {
+            .creator-note {
+                right: 1rem;
+                font-size: 0.8rem;
+                top: 0.5rem;
             }
+        }
             
             .header-content {
                 position: relative;
