@@ -85,7 +85,6 @@
         }
 
         header {
-            position: relative;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             padding: 4rem 2rem;
