@@ -103,6 +103,77 @@
                 <button onclick="calculateBeam()">Calculate</button>
                 <div class="result" id="beamResult"></div>
             </div>
+            
+            <!-- Roofing Calculator -->
+            <div class="calculator">
+                <h2>Roofing Calculator</h2>
+                <div class="input-group">
+                    <label>Roof Area (m²)</label>
+                    <input type="number" id="roofArea">
+                </div>
+                <div class="input-group">
+                    <label>Tile Coverage (tiles/m²)</label>
+                    <input type="number" id="tileCoverage" value="10">
+                </div>
+                <button onclick="calculateRoof()">Calculate</button>
+                <div class="result" id="roofResult"></div>
+            </div>
+            
+            <!-- Plasterboard Calculator -->
+            <div class="calculator">
+                <h2>Plasterboard Calculator</h2>
+                <div class="input-group">
+                    <label>Ceiling/Wall Area (m²)</label>
+                    <input type="number" id="plasterArea">
+                </div>
+                <div class="input-group">
+                    <label>Board Size (m²)</label>
+                    <input type="number" id="boardSize" value="2.88">
+                </div>
+                <button onclick="calculatePlasterboard()">Calculate</button>
+                <div class="result" id="plasterResult"></div>
+            </div>
+            
+            <!-- Skip Hire Calculator -->
+            <div class="calculator">
+                <h2>Skip Hire Estimator</h2>
+                <div class="input-group">
+                    <label>Waste Volume (m³)</label>
+                    <input type="number" id="wasteVolume">
+                </div>
+                <button onclick="calculateSkip()">Calculate</button>
+                <div class="result" id="skipResult"></div>
+            </div>
+            
+            <!-- Insulation Calculator -->
+            <div class="calculator">
+                <h2>Insulation Calculator</h2>
+                <div class="input-group">
+                    <label>Wall Area (m²)</label>
+                    <input type="number" id="insulationArea">
+                </div>
+                <div class="input-group">
+                    <label>Roll Coverage (m²)</label>
+                    <input type="number" id="rollCoverage" value="10">
+                </div>
+                <button onclick="calculateInsulation()">Calculate</button>
+                <div class="result" id="insulationResult"></div>
+            </div>
+            
+            <!-- Ventilation Calculator -->
+            <div class="calculator">
+                <h2>Ventilation Calculator</h2>
+                <div class="input-group">
+                    <label>Room Volume (m³)</label>
+                    <input type="number" id="roomVolume">
+                </div>
+                <div class="input-group">
+                    <label>Occupants</label>
+                    <input type="number" id="occupants">
+                </div>
+                <button onclick="calculateVentilation()">Calculate</button>
+                <div class="result" id="ventilationResult"></div>
+            </div>
         </div>
     </div>
 
@@ -165,6 +236,61 @@
             const depth = (span * 1000 / 20).toFixed(0); 
             document.getElementById('beamResult').textContent = 
                 `Minimum depth: ~${depth}mm (consult engineer)`;
+        }
+                // Roofing Calculator
+        function calculateRoof() {
+            const area = parseFloat(document.getElementById('roofArea').value);
+            const coverage = parseFloat(document.getElementById('tileCoverage').value);
+            const tiles = Math.ceil(area * coverage * 1.1); // 10% waste
+            document.getElementById('roofResult').textContent = 
+                `${tiles} tiles needed (including 10% waste)`;
+        }
+        
+        // Plasterboard Calculator
+        function calculatePlasterboard() {
+            const area = parseFloat(document.getElementById('plasterArea').value);
+            const boardSize = parseFloat(document.getElementById('boardSize').value);
+            const boards = Math.ceil(area / boardSize * 1.1); // 10% waste
+            document.getElementById('plasterResult').textContent = 
+                `${boards} boards needed (standard 2.4x1.2m boards)`;
+        }
+        
+        // Skip Hire Calculator
+        function calculateSkip() {
+            const volume = parseFloat(document.getElementById('wasteVolume').value);
+            const sizes = {
+                "2 yard": 1.5,
+                "4 yard": 3,
+                "6 yard": 4.5,
+                "8 yard": 6
+            };
+            let recommended = "8 yard";
+            for(const [size, capacity] of Object.entries(sizes)) {
+                if(volume <= capacity) {
+                    recommended = size;
+                    break;
+                }
+            }
+            document.getElementById('skipResult').textContent = 
+                `Recommended: ${recommended} skip (${sizes[recommended]}m³)`;
+        }
+        
+        // Insulation Calculator
+        function calculateInsulation() {
+            const area = parseFloat(document.getElementById('insulationArea').value);
+            const coverage = parseFloat(document.getElementById('rollCoverage').value);
+            const rolls = Math.ceil(area / coverage * 1.1); // 10% waste
+            document.getElementById('insulationResult').textContent = 
+                `${rolls} rolls needed (100mm mineral wool)`;
+        }
+        
+        // Ventilation Calculator
+        function calculateVentilation() {
+            const volume = parseFloat(document.getElementById('roomVolume').value);
+            const people = parseFloat(document.getElementById('occupants').value);
+            const airflow = Math.max(volume * 0.5, people * 10); // UK Building Regs
+            document.getElementById('ventilationResult').textContent = 
+                `Required: ${airflow.toFixed(1)} m³/hr fresh air`;
         }
     </script>
 </body>
