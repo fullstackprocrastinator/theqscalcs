@@ -184,6 +184,111 @@
                 <button onclick="calculateVentilation()">Calculate</button>
                 <div class="result" id="ventilationResult"></div>
             </div>
+
+            <!-- Temporary Works Cost Estimator -->
+            <div class="calculator">
+                <h2>Temporary Works Cost Estimator</h2>
+                <div class="input-group">
+                    <label>Scaffolding Length (linear m)</label>
+                    <input type="number" id="scaffoldLength">
+                </div>
+                <div class="input-group">
+                    <label>Height Zones</label>
+                    <input type="number" id="heightZones" value="1">
+                </div>
+                <div class="input-group">
+                    <label>Hoarding Length (m)</label>
+                    <input type="number" id="hoardingLength">
+                </div>
+                <div class="input-group">
+                    <label>Material Type</label>
+                    <select id="hoardingMaterial">
+                        <option value="timber">Timber</option>
+                        <option value="steel">Steel</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label><input type="checkbox" id="cdmCompliance"> CDM 2015 Compliance</label>
+                </div>
+                <button onclick="calculateTempWorks()">Calculate</button>
+                <div class="result" id="tempWorksResult"></div>
+            </div>
+            
+            <!-- Preliminaries Calculator -->
+            <div class="calculator">
+                <h2>Preliminaries Calculator</h2>
+                <div class="input-group">
+                    <label>Number of Portacabins</label>
+                    <input type="number" id="portacabins">
+                </div>
+                <div class="input-group">
+                    <label>Crane Hire Weeks</label>
+                    <input type="number" id="craneWeeks">
+                </div>
+                <div class="input-group">
+                    <label>Site Area (hectares)</label>
+                    <input type="number" id="siteArea">
+                </div>
+                <button onclick="calculatePreliminaries()">Calculate</button>
+                <div class="result" id="prelimResult"></div>
+            </div>
+            
+            <!-- Earthworks Optimiser -->
+            <div class="calculator">
+                <h2>Earthworks Cut/Fill Optimiser</h2>
+                <div class="input-group">
+                    <label>Cut Volume (m³)</label>
+                    <input type="number" id="cutVolume">
+                </div>
+                <div class="input-group">
+                    <label>Fill Volume (m³)</label>
+                    <input type="number" id="fillVolume">
+                </div>
+                <div class="input-group">
+                    <label>Haul Distance (km)</label>
+                    <input type="number" id="haulDistance">
+                </div>
+                <button onclick="calculateEarthworks()">Calculate</button>
+                <div class="result" id="earthworksResult"></div>
+            </div>
+            
+            <!-- Life Cycle Costing Tool -->
+            <div class="calculator">
+                <h2>Life Cycle Costing Tool</h2>
+                <div class="input-group">
+                    <label>Initial Cost (£)</label>
+                    <input type="number" id="initialCost">
+                </div>
+                <div class="input-group">
+                    <label>Lifespan (years)</label>
+                    <input type="number" id="lifespan" value="25">
+                </div>
+                <div class="input-group">
+                    <label>Annual Maintenance (£)</label>
+                    <input type="number" id="maintenance">
+                </div>
+                <button onclick="calculateLifeCycle()">Calculate</button>
+                <div class="result" id="lifecycleResult"></div>
+            </div>
+            
+            <!-- NEC Compensation Calculator -->
+            <div class="calculator">
+                <h2>NEC Compensation Event Calculator</h2>
+                <div class="input-group">
+                    <label>Original Duration (weeks)</label>
+                    <input type="number" id="originalDuration">
+                </div>
+                <div class="input-group">
+                    <label>Delay (weeks)</label>
+                    <input type="number" id="delayWeeks">
+                </div>
+                <div class="input-group">
+                    <label>Additional Resources (£)</label>
+                    <input type="number" id="additionalCost">
+                </div>
+                <button onclick="calculateNEC()">Calculate</button>
+                <div class="result" id="necResult"></div>
+            </div>
         </div>
     </div>
 
@@ -301,6 +406,103 @@
             const airflow = Math.max(volume * 0.5, people * 10); // UK Building Regs
             document.getElementById('ventilationResult').textContent = 
                 `Required: ${airflow.toFixed(1)} m³/hr fresh air`;
+        }
+
+        // Temporary Works Calculator
+        function calculateTempWorks() {
+            const scaffLength = parseFloat(document.getElementById('scaffoldLength').value);
+            const zones = parseFloat(document.getElementById('heightZones').value);
+            const hoardingLength = parseFloat(document.getElementById('hoardingLength').value);
+            const material = document.getElementById('hoardingMaterial').value;
+            const cdmCompliance = document.getElementById('cdmCompliance').checked;
+        
+            // Cost calculations
+            let scaffCost = scaffLength * 35 * zones;
+            let hoardingCost = hoardingLength * (material === 'timber' ? 120 : 200);
+            let cdmCost = cdmCompliance ? 2500 : 0;
+            let total = scaffCost + hoardingCost + cdmCost;
+        
+            document.getElementById('tempWorksResult').innerHTML = `
+                Scaffolding: £${scaffCost.toLocaleString()}<br>
+                Hoarding: £${hoardingCost.toLocaleString()}<br>
+                CDM Compliance: £${cdmCost.toLocaleString()}<br>
+                <strong>Total: £${total.toLocaleString()}</strong>
+            `;
+        }
+        
+        // Preliminaries Calculator
+        function calculatePreliminaries() {
+            const cabins = parseFloat(document.getElementById('portacabins').value);
+            const craneWeeks = parseFloat(document.getElementById('craneWeeks').value);
+            const area = parseFloat(document.getElementById('siteArea').value);
+        
+            const cabinCost = cabins * 4500;
+            const craneCost = craneWeeks * (2500 + 1200); // Crane + operator
+            const utilities = area * 1500;
+            const total = cabinCost + craneCost + utilities;
+        
+            document.getElementById('prelimResult').innerHTML = `
+                NEC4 Breakdown:<br>
+                - Site Setup: £${cabinCost.toLocaleString()}<br>
+                - Plant Hire: £${craneCost.toLocaleString()}<br>
+                - Utilities: £${utilities.toLocaleString()}<br>
+                <strong>Total Prelims: £${total.toLocaleString()}</strong>
+            `;
+        }
+        
+        // Earthworks Optimiser
+        function calculateEarthworks() {
+            const cut = parseFloat(document.getElementById('cutVolume').value);
+            const fill = parseFloat(document.getElementById('fillVolume').value);
+            const haul = parseFloat(document.getElementById('haulDistance').value);
+            
+            const balance = cut - fill;
+            const landfillTax = 126.15; // £/tonne (2024 rate)
+            const haulCost = balance > 0 ? balance * haul * 3.50 : 0;
+            const disposalCost = balance > 0 ? balance * 1.8 * landfillTax : 0;
+            const importCost = balance < 0 ? Math.abs(balance) * 25 : 0;
+        
+            document.getElementById('earthworksResult').innerHTML = `
+                Site Balance: ${balance} m³<br>
+                Haulage Cost: £${haulCost.toLocaleString()}<br>
+                ${balance > 0 ? `Disposal Cost: £${disposalCost.toLocaleString()}` : `Import Cost: £${importCost.toLocaleString()}`}
+            `;
+        }
+        
+        // Life Cycle Costing
+        function calculateLifeCycle() {
+            const initial = parseFloat(document.getElementById('initialCost').value);
+            const years = parseFloat(document.getElementById('lifespan').value);
+            const maintenance = parseFloat(document.getElementById('maintenance').value);
+            const discountRate = 3.5; // UK public sector discount rate
+        
+            let npv = initial;
+            for(let y = 1; y <= years; y++) {
+                npv += maintenance / Math.pow(1 + discountRate/100, y);
+            }
+        
+            document.getElementById('lifecycleResult').innerHTML = `
+                NPV (${years} years): £${npv.toLocaleString()}<br>
+                Carbon Cost: ${(years * 120).toLocaleString()} kgCO₂e<br>
+                (Assumes 120kg/yr carbon impact)
+            `;
+        }
+        
+        // NEC Compensation Calculator
+        function calculateNEC() {
+            const duration = parseFloat(document.getElementById('originalDuration').value);
+            const delay = parseFloat(document.getElementById('delayWeeks').value);
+            const costs = parseFloat(document.getElementById('additionalCost').value);
+        
+            const timeImpact = duration * 0.15 < delay ? "EOT Required" : "Within float";
+            const costImpact = costs * 1.13; // 13% NEC fee percentage
+        
+            document.getElementById('necResult').innerHTML = `
+                Compensation Event Analysis:<br>
+                Time Impact: ${timeImpact}<br>
+                Cost Impact: £${costImpact.toLocaleString()}<br>
+                (Includes 13% fee percentage)
+            `;
         }
     </script>
 </body>
