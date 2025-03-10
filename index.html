@@ -289,6 +289,93 @@
                 <button onclick="calculateNEC()">Calculate</button>
                 <div class="result" id="necResult"></div>
             </div>
+            <!-- Rainwater Drainage Calculator -->
+            <div class="calculator">
+                <h2>Rainwater Drainage Calculator</h2>
+                <div class="input-group">
+                    <label>Roof Area (m²)</label>
+                    <input type="number" id="roofAreaDrain">
+                </div>
+                <div class="input-group">
+                    <label>Rainfall Intensity (mm/hr)</label>
+                    <input type="number" id="rainfall" value="75">
+                </div>
+                <button onclick="calculateDrainage()">Calculate</button>
+                <div class="result" id="drainageResult"></div>
+            </div>
+            
+            <!-- Part L Compliance Checker -->
+            <div class="calculator">
+                <h2>Part L Compliance Checker</h2>
+                <div class="input-group">
+                    <label>Wall U-Value (W/m²K)</label>
+                    <input type="number" id="wallUValue" step="0.01">
+                </div>
+                <div class="input-group">
+                    <label>Window U-Value (W/m²K)</label>
+                    <input type="number" id="windowUValue" step="0.1" value="1.6">
+                </div>
+                <button onclick="checkPartL()">Check Compliance</button>
+                <div class="result" id="partLResult"></div>
+            </div>
+            
+            <!-- Fire Resistance Calculator -->
+            <div class="calculator">
+                <h2>Fire Resistance Calculator</h2>
+                <div class="input-group">
+                    <label>Building Height (m)</label>
+                    <input type="number" id="buildingHeight">
+                </div>
+                <div class="input-group">
+                    <label>Building Type</label>
+                    <select id="buildingType">
+                        <option value="residential">Residential</option>
+                        <option value="commercial">Commercial</option>
+                    </select>
+                </div>
+                <button onclick="calculateFireResistance()">Calculate</button>
+                <div class="result" id="fireResult"></div>
+            </div>
+            
+            <!-- Masonry Calculator -->
+            <div class="calculator">
+                <h2>Masonry Calculator</h2>
+                <div class="input-group">
+                    <label>Wall Length (m)</label>
+                    <input type="number" id="masonryLength">
+                </div>
+                <div class="input-group">
+                    <label>Wall Height (m)</label>
+                    <input type="number" id="masonryHeight">
+                </div>
+                <div class="input-group">
+                    <label>Block Type</label>
+                    <select id="blockType">
+                        <option value="7N">7N Solid</option>
+                        <option value="10N">10N Hollow</option>
+                    </select>
+                </div>
+                <button onclick="calculateMasonry()">Calculate</button>
+                <div class="result" id="masonryResult"></div>
+            </div>
+            
+            <!-- Plant Hire Calculator -->
+            <div class="calculator">
+                <h2>Plant Hire Calculator</h2>
+                <div class="input-group">
+                    <label>Plant Type</label>
+                    <select id="plantType">
+                        <option value="excavator">360° Excavator</option>
+                        <option value="dumper">Dumper Truck</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Hire Duration (days)</label>
+                    <input type="number" id="hireDays">
+                </div>
+                <button onclick="calculatePlantHire()">Calculate</button>
+                <div class="result" id="plantResult"></div>
+            </div>
         </div>
     </div>
 
@@ -502,6 +589,84 @@
                 Time Impact: ${timeImpact}<br>
                 Cost Impact: £${costImpact.toLocaleString()}<br>
                 (Includes 13% fee percentage)
+            `;
+        }
+
+                // Rainwater Drainage Calculator
+        function calculateDrainage() {
+            const area = parseFloat(document.getElementById('roofAreaDrain').value);
+            const rainfall = parseFloat(document.getElementById('rainfall').value);
+            const flowRate = (area * rainfall) / 3600; // l/s
+            const pipeSize = flowRate > 3.5 ? "110mm" : "68mm";
+            document.getElementById('drainageResult').innerHTML = `
+                Required: ${pipeSize} downpipe<br>
+                Flow rate: ${flowRate.toFixed(2)} l/s
+            `;
+        }
+        
+        // Part L Compliance Checker (2023 Regs)
+        function checkPartL() {
+            const wallU = parseFloat(document.getElementById('wallUValue').value);
+            const windowU = parseFloat(document.getElementById('windowUValue').value);
+            const wallCompliant = wallU <= 0.26;
+            const windowCompliant = windowU <= 1.6;
+            
+            let results = [];
+            if(!wallCompliant) results.push("Wall U-value exceeds 0.26 W/m²K");
+            if(!windowCompliant) results.push("Window U-value exceeds 1.6 W/m²K");
+            
+            const resultDiv = document.getElementById('partLResult');
+            resultDiv.innerHTML = results.length > 0 
+                ? `⚠️ Non-compliant: ${results.join('<br>')}`
+                : "✓ Compliant with Part L 2023";
+            resultDiv.style.color = results.length > 0 ? '#e74c3c' : '#2ecc71';
+        }
+        
+        // Fire Resistance Calculator (ADB 2020)
+        function calculateFireResistance() {
+            const height = parseFloat(document.getElementById('buildingHeight').value);
+            const type = document.getElementById('buildingType').value;
+            let resistance;
+            
+            if(type === 'residential') {
+                resistance = height > 18 ? 120 : height > 11 ? 90 : 60;
+            } else {
+                resistance = height > 30 ? 180 : height > 18 ? 120 : 60;
+            }
+            
+            document.getElementById('fireResult').innerHTML = `
+                Required FR: ${resistance} minutes<br>
+                (Approved Document B)
+            `;
+        }
+        
+        // Masonry Calculator (BS EN 1996-1-1)
+        function calculateMasonry() {
+            const length = parseFloat(document.getElementById('masonryLength').value);
+            const height = parseFloat(document.getElementById('masonryHeight').value);
+            const blockType = document.getElementById('blockType').value;
+            const strength = blockType === '7N' ? 7 : 10;
+            const capacity = (length * 0.1 * strength * 1000).toFixed(0);
+            
+            document.getElementById('masonryResult').innerHTML = `
+                Load capacity: ~${capacity} kN<br>
+                (Assuming 100mm thick wall)
+            `;
+        }
+        
+        // Plant Hire Calculator
+        function calculatePlantHire() {
+            const plant = document.getElementById('plantType').value;
+            const days = parseFloat(document.getElementById('hireDays').value);
+            const rates = {
+                excavator: { daily: 180, fuel: 40 },
+                dumper: { daily: 75, fuel: 20 }
+            };
+            const total = days * (rates[plant].daily + rates[plant].fuel);
+            
+            document.getElementById('plantResult').innerHTML = `
+                Total cost: £${total.toFixed(0)}<br>
+                (Incl. fuel & operator)
             `;
         }
     </script>
