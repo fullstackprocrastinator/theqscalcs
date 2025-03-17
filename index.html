@@ -376,6 +376,82 @@
                 <button onclick="calculatePlantHire()">Calculate</button>
                 <div class="result" id="plantResult"></div>
             </div>
+
+                        <!-- 1. Ladder Angle Calculator -->
+            <div class="calculator">
+                <h2>Ladder Angle Calculator</h2>
+                <div class="input-group">
+                    <label>Ladder Height (m)</label>
+                    <input type="number" id="ladderHeight">
+                </div>
+                <div class="input-group">
+                    <label>Base Distance (m)</label>
+                    <input type="number" id="baseDistance">
+                </div>
+                <button onclick="calculateLadderAngle()">Check Safety</button>
+                <div class="result" id="ladderResult"></div>
+            </div>
+            
+            <!-- 2. Screed Calculator -->
+            <div class="calculator">
+                <h2>Screed Calculator</h2>
+                <div class="input-group">
+                    <label>Floor Area (m²)</label>
+                    <input type="number" id="screedArea">
+                </div>
+                <div class="input-group">
+                    <label>Thickness (mm)</label>
+                    <input type="number" id="screedThickness" value="75">
+                </div>
+                <button onclick="calculateScreed()">Calculate</button>
+                <div class="result" id="screedResult"></div>
+            </div>
+            
+            <!-- 3. Site Noise Assessment -->
+            <div class="calculator">
+                <h2>Site Noise Assessment</h2>
+                <div class="input-group">
+                    <label>Noise Level (dB)</label>
+                    <input type="number" id="noiseLevel">
+                </div>
+                <div class="input-group">
+                    <label>Exposure Time (hrs)</label>
+                    <input type="number" id="exposureTime">
+                </div>
+                <button onclick="calculateNoise()">Assess Risk</button>
+                <div class="result" id="noiseResult"></div>
+            </div>
+            
+            <!-- 4. Ventilation Rate Calculator -->
+            <div class="calculator">
+                <h2>Ventilation Rate Calculator</h2>
+                <div class="input-group">
+                    <label>Room Volume (m³)</label>
+                    <input type="number" id="ventVolume">
+                </div>
+                <div class="input-group">
+                    <label>Occupancy</label>
+                    <input type="number" id="occupants">
+                </div>
+                <button onclick="calculateVentilation()">Calculate</button>
+                <div class="result" id="ventResult"></div>
+            </div>
+            
+            <!-- 5. Construction Phase Plan Checker -->
+            <div class="calculator">
+                <h2>Construction Phase Plan Checker</h2>
+                <div class="input-group">
+                    <label><input type="checkbox" id="riskAssessment"> Risk Assessment</label>
+                </div>
+                <div class="input-group">
+                    <label><input type="checkbox" id="methodStatement"> Method Statement</label>
+                </div>
+                <div class="input-group">
+                    <label><input type="checkbox" id="welfare"> Welfare Facilities</label>
+                </div>
+                <button onclick="checkPlan()">Verify Plan</button>
+                <div class="result" id="planResult"></div>
+            </div>
         </div>
     </div>
 
@@ -668,6 +744,84 @@
                 Total cost: £${total.toFixed(0)}<br>
                 (Incl. fuel & operator)
             `;
+        }
+
+                // Ladder Angle Calculator (1:4 rule)
+        function calculateLadderAngle() {
+            const height = parseFloat(document.getElementById('ladderHeight').value);
+            const base = parseFloat(document.getElementById('baseDistance').value);
+            const ratio = base / height;
+            const resultDiv = document.getElementById('ladderResult');
+            
+            let message = "";
+            if (ratio >= 0.24 && ratio <= 0.26) { // 1:4 ratio (75°)
+                message = "✓ Ideal angle (1:4 ratio)";
+                resultDiv.style.color = '#2ecc71';
+            } else {
+                message = `⚠️ Adjust base to ${(height/4).toFixed(2)}m (current ratio 1:${(1/ratio).toFixed(1)})`;
+                resultDiv.style.color = '#e74c3c';
+            }
+            resultDiv.innerHTML = message;
+        }
+        
+        // Screed Calculator
+        function calculateScreed() {
+            const area = parseFloat(document.getElementById('screedArea').value);
+            const thickness = parseFloat(document.getElementById('screedThickness').value) / 1000;
+            const volume = area * thickness;
+            const bags = Math.ceil(volume * 1.8); // 1.8 bags/m³
+            document.getElementById('screedResult').innerHTML = `
+                ${volume.toFixed(2)} m³ required<br>
+                ${bags} bags (25kg each) needed
+            `;
+        }
+        
+        // Noise Assessment (HSE guidelines)
+        function calculateNoise() {
+            const dB = parseFloat(document.getElementById('noiseLevel').value);
+            const hours = parseFloat(document.getElementById('exposureTime').value);
+            const limit = 87 - (10 * Math.log10(hours));
+            
+            const resultDiv = document.getElementById('noiseResult');
+            if(dB > limit) {
+                resultDiv.innerHTML = `⚠️ Over limit (${limit.toFixed(1)} dB) - PPE required`;
+                resultDiv.style.color = '#e74c3c';
+            } else {
+                resultDiv.innerHTML = "✓ Within safe limits";
+                resultDiv.style.color = '#2ecc71';
+            }
+        }
+        
+        // 4. Ventilation Calculator (Approved Document F)
+        function calculateVentilation() {
+            const volume = parseFloat(document.getElementById('ventVolume').value);
+            const people = parseFloat(document.getElementById('occupants').value);
+            const rate = Math.max(0.5 * people, 0.3 * volume).toFixed(1);
+            document.getElementById('ventResult').innerHTML = `
+                Minimum ventilation rate: ${rate} l/s<br>
+                (Building Regs Part F)
+            `;
+        }
+        
+        // Construction Phase Plan Checker (CDM 2015)
+        function checkPlan() {
+            const hasRA = document.getElementById('riskAssessment').checked;
+            const hasMS = document.getElementById('methodStatement').checked;
+            const hasWF = document.getElementById('welfare').checked;
+            const missing = [];
+            
+            if(!hasRA) missing.push("Risk Assessment");
+            if(!hasMS) missing.push("Method Statement");
+            if(!hasWF) missing.push("Welfare Facilities");
+            
+            const resultDiv = document.getElementById('planResult');
+            if(missing.length > 0) {
+                resultDiv.innerHTML = `⚠️ Missing: ${missing.join(', ')}`;
+                resultDiv.style.color = '#e74c3c';
+            } else {
+                resultDiv.innerHTML = "✓ Compliant with CDM 2015";
+                resultDiv.style.color = '#2ecc71';
+            }
         }
     </script>
 </body>
