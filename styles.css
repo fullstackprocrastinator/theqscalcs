@@ -1,226 +1,216 @@
+/*
+  Modernized Stylesheet for The QS Calcs
+  - Uses CSS variables for easy theme management.
+  - Implements a clean, modern design with a responsive layout.
+  - Consolidates styles for consistency and maintainability.
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 :root {
-            --primary: #2c3e50;
-            --secondary: #3498db;
-            --light: #ecf0f1;
-        }
+    --primary-color: #2c3e50; /* Dark Blue/Grey */
+    --secondary-color: #3498db; /* Bright Blue */
+    --light-color: #ecf0f1; /* Light Grey */
+    --background-color: #f8f9fa; /* Off-White */
+    --text-color: #333;
+    --border-color: #ddd;
+    --shadow-color: rgba(0, 0, 0, 0.07);
+    --border-radius: 10px;
+}
 
-            .creator-note {
-            position: absolute;
-            top: 1rem;
-            right: 2rem;
-            color: rgba(255,255,255,0.9);
-            font-size: 0.9rem;
-            font-weight: 300;
-        }
-        
-        .creator-note a {
-            color: var(--light);
-            text-decoration: none;
-            transition: opacity 0.3s ease;
-        }
-        
-        .creator-note a:hover {
-            opacity: 0.8;
-            text-decoration: underline;
-        }
+body {
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
 
-                .last-updated {
-            text-align: center;
-            color: rgba(255,255,255,0.9);
-            font-size: 0.9rem;
-            font-weight: 300;
-            margin-top: 1rem;
-        }
-        
-        /* Add position: relative to the header */
-        header {
-            position: relative;
-            /* existing styles remain */
-        }
-        
-        /* Optional: Mobile adjustment */
-        @media (max-width: 768px) {
-            .creator-note {
-                right: 1rem;
-                font-size: 0.8rem;
-                top: 0.5rem;
-            }
-        }
-            
-            
-            h1 {
-                font-weight: 300;
-                font-size: 2.8rem;
-                margin: 0;
-                line-height: 1.2;
-            }
-            
-            @media (max-width: 768px) {
-                header {
-                    padding: 4rem 1rem;
-                    min-height: 200px;
-                }
-                
-                h1 {
-                    font-size: 2.2rem;
-                }
-            }
-        body {
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: #f8f9fa;
-            color: #333;
-        }
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
+/* --- Header Styles --- */
+header {
+    position: relative;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 4rem 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    border-bottom-left-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+}
 
-        header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 4rem 2rem;
-            margin-bottom: 2rem;
-            text-align: center;
-        }
+header h1 {
+    font-weight: 300;
+    font-size: 2.8rem;
+    margin: 0;
+    line-height: 1.2;
+}
 
-        h1 {
-            font-weight: 300;
-            font-size: 2.5rem;
-            margin: 0 0 1rem 0;
-        }
+header .header-content p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+    font-weight: 300;
+    margin-top: 1rem;
+}
 
-        .creator-note {
-            position: absolute;
-            top: 1rem;
-            right: 2rem;
-            color: rgba(255,255,255,0.9);
-            font-size: 0.9rem;
-            font-weight: 300;
-        }
-        
-        .creator-note a {
-            color: var(--light);
-            text-decoration: none;
-            transition: opacity 0.3s ease;
-        }
-        
-        .creator-note a:hover {
-            opacity: 0.8;
-            text-decoration: underline;
-        }
+header .header-content a {
+    color: var(--light-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
 
-        .last-updated {
-            text-align: center;
-            color: #666;
-            font-size: 0.9rem;
-            font-weight: 300;
-            margin-top: 2rem;
-        }
+header .header-content a:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+}
 
-        .calculators-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
+.creator-note {
+    position: absolute;
+    top: 1rem;
+    right: 2rem;
+    text-align: right;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+    font-weight: 300;
+}
 
-        .calculator {
-            background: white;
-            border-radius: 10px;
-            padding: 1.5rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            transition: transform 0.2s;
-        }
+.creator-note a {
+    color: var(--light-color);
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
 
-        .calculator:hover {
-            transform: translateY(-3px);
-        }
+.creator-note a:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+}
 
-        .calculator h2 {
-            color: var(--secondary);
-            margin-top: 0;
-            font-size: 1.3rem;
-            font-weight: 600;
-        }
 
-        .input-group {
-            margin-bottom: 1rem;
-        }
+/* --- Calculator Grid & Card Styles --- */
+.calculators-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+}
 
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #666;
-            font-size: 0.9rem;
-        }
+.calculator {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 1.5rem 2rem;
+    box-shadow: 0 4px 12px var(--shadow-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
 
-        input {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-sizing: border-box;
-            font-size: 1rem;
-        }
+.calculator:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px var(--shadow-color);
+}
 
-        button {
-            background: var(--secondary);
-            color: white;
-            border: none;
-            padding: 1rem 1.5rem;
-            border-radius: 8px;
-            cursor: pointer;
-            width: 100%;
-            font-size: 1rem;
-            transition: background 0.3s ease;
-        }
+.calculator h2 {
+    color: var(--primary-color);
+    margin-top: 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
 
-        button:hover {
-            background: #2980b9;
-        }
+/* --- Form Element Styles --- */
+.input-group {
+    margin-bottom: 1rem;
+}
 
-        .result {
-            margin-top: 1rem;
-            padding: 1rem;
-            background: var(--light);
-            border-radius: 8px;
-            text-align: center;
-            font-weight: 500;
-            color: var(--primary);
-        }
+.input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #555;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
 
-        @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-            }
-            
-            header {
-                padding: 3rem 1rem;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .creator-note {
-                right: 1rem;
-                font-size: 0.8rem;
-                top: 0.5rem;
-            }
-        }
-            .last-updated a,
-            .last-updated a:visited {
-                color: inherit; /* Inherits the parent's text color */
-                text-decoration: none; /* Removes underline */
-                transition: color 0.3s ease; /* Smooth color transition */
-            }
-            
-            .last-updated a:hover {
-                color: var(--secondary); /* Uses your theme's secondary color on hover */
-                text-decoration: underline; /* Optional: Add underline on hover */
-                cursor: pointer; /* Shows pointer cursor on hover */
-            }
+.input-group input[type="number"],
+.input-group input[type="checkbox"],
+.input-group select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+.input-group input[type="checkbox"] {
+    width: auto;
+    margin-right: 0.5rem;
+}
+
+.btn {
+    background: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: auto; /* Pushes button to the bottom of the card */
+}
+
+.btn:hover {
+    background: #2980b9; /* A slightly darker blue */
+    transform: translateY(-2px);
+}
+
+.result {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: var(--light-color);
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 500;
+    color: var(--primary-color);
+    word-wrap: break-word;
+    border: 1px solid #e0e0e0;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    header {
+        padding: 3rem 1rem;
+    }
+
+    header h1 {
+        font-size: 2.2rem;
+    }
+
+    .creator-note {
+        position: static;
+        text-align: center;
+        margin-top: 1rem;
+    }
+
+    .calculators-grid {
+        grid-template-columns: 1fr;
+    }
+}
