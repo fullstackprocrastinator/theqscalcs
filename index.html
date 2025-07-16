@@ -5,29 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The QS Calcs - Quantity Surveying Calculators | Construction Calculators</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-50">
-    <header class="bg-white shadow-md">
-        <div class="container mx-auto px-4 py-6">
-            <div class="flex justify-between items-center">
-                <div>
-                    <h1 id="page-title" class="text-3xl font-bold text-gray-800">The Quantity Surveying Calculators</h1>
-                    <p class="text-gray-600"><a href="https://www.theqsdictionary.com/" target="_blank" class="text-blue-500 hover:underline">&#128214; Click here for The QS Dictionary &#128214;</a></p>
-                </div>
-                <div class="text-right">
-                     <p class="text-sm text-gray-500">Created by <a href="https://www.linkedin.com/in/bengoulding" target="_blank" rel="noopener" class="text-blue-500 hover:underline">Ben</a></p>
-                     <a href="https://buymeacoffee.com/bengouldins" target="_blank" rel="noopener" class="text-sm text-blue-500 hover:underline">Buy me a coffee?</a>
-                </div>
-            </div>
+<body>
+    <header>
+        <div class="creator-note">
+            Created by <a href="https://www.linkedin.com/in/bengoulding" target="_blank" rel="noopener">Ben</a><br>
+            <a href="https://buymeacoffee.com/bengouldins" target="_blank" rel="noopener">Buy me a coffee?</a>
+        </div>
+        <div class="header-content">
+            <h1 id="page-title">The Quantity Surveying Calculators</h1>
+            <p><a href="https://www.theqsdictionary.com/" target="_blank">&#128214; Click here for The QS Dictionary &#128214;</a></p>
         </div>
         <script data-goatcounter="https://191186.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
     </header>
-    <main class="container mx-auto px-4 py-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <main class="container">
+        <div class="calculators-grid">
             <!-- Stair Design Calculator -->
             <div class="calculator">
-                <h2 class="text-xl font-bold mb-4">Stair Design Calculator</h2>
+                <h2>Stair Design Calculator</h2>
                 <div class="input-group">
                     <label for="totalHeight">Total Height (mm)</label>
                     <input type="number" id="totalHeight">
@@ -42,7 +37,7 @@
 
             <!-- Structural Load Calculator -->
             <div class="calculator">
-                <h2 class="text-xl font-bold mb-4">Structural Load Calculator</h2>
+                <h2>Structural Load Calculator</h2>
                 <div class="input-group">
                     <label for="floorArea">Floor Area (m²)</label>
                     <input type="number" id="floorArea">
@@ -57,7 +52,7 @@
 
             <!-- Brick Estimator -->
             <div class="calculator">
-                <h2 class="text-xl font-bold mb-4">Brick Estimator</h2>
+                <h2>Brick Estimator</h2>
                 <div class="input-group">
                     <label for="wallLength">Wall Length (m)</label>
                     <input type="number" id="wallLength">
@@ -72,7 +67,7 @@
 
             <!-- Paint Calculator -->
             <div class="calculator">
-                <h2 class="text-xl font-bold mb-4">Paint Calculator</h2>
+                <h2>Paint Calculator</h2>
                 <div class="input-group">
                     <label for="paintArea">Wall Area (m²)</label>
                     <input type="number" id="paintArea">
@@ -87,7 +82,7 @@
 
             <!-- Concrete Volume Calculator -->
             <div class="calculator">
-                <h2 class="text-xl font-bold mb-4">Concrete Volume</h2>
+                <h2>Concrete Volume</h2>
                 <div class="input-group">
                     <label for="concreteLength">Length (m)</label>
                     <input type="number" id="concreteLength">
@@ -106,7 +101,7 @@
 
             <!-- Beam Span Calculator -->
             <div class="calculator">
-                <h2 class="text-xl font-bold mb-4">Beam Span Calculator</h2>
+                <h2>Beam Span Calculator</h2>
                 <div class="input-group">
                     <label for="beamSpan">Span (m)</label>
                     <input type="number" id="beamSpan">
@@ -121,7 +116,7 @@
             
             <!-- Roofing Calculator -->
             <div class="calculator">
-                <h2 class="text-xl font-bold mb-4">Roofing Calculator</h2>
+                <h2>Roofing Calculator</h2>
                 <div class="input-group">
                     <label for="roofArea">Roof Area (m²)</label>
                     <input type="number" id="roofArea">
@@ -136,7 +131,7 @@
             
             <!-- Plasterboard Calculator -->
             <div class="calculator">
-                <h2 class="text-xl font-bold mb-4">Plasterboard Calculator</h2>
+                <h2>Plasterboard Calculator</h2>
                 <div class="input-group">
                     <label for="plasterArea">Ceiling/Wall Area (m²)</label>
                     <input type="number" id="plasterArea">
@@ -151,7 +146,7 @@
             
             <!-- Skip Hire Calculator -->
             <div class="calculator">
-                <h2 class="text-xl font-bold mb-4">Skip Hire Estimator</h2>
+                <h2>Skip Hire Estimator</h2>
                 <div class="input-group">
                     <label for="wasteVolume">Waste Volume (m³)</label>
                     <input type="number" id="wasteVolume">
@@ -162,7 +157,7 @@
             
             <!-- Insulation Calculator -->
             <div class="calculator">
-                <h2 class="text-xl font-bold mb-4">Insulation Calculator</h2>
+                <h2>Insulation Calculator</h2>
                 <div class="input-group">
                     <label for="insulationArea">Wall Area (m²)</label>
                     <input type="number" id="insulationArea">
@@ -177,7 +172,7 @@
             
             <!-- Ventilation Calculator -->
             <div class="calculator">
-                <h2 class="text-xl font-bold mb-4">Ventilation Calculator</h2>
+                <h2>Ventilation Calculator</h2>
                 <div class="input-group">
                     <label for="roomVolume">Room Volume (m³)</label>
                     <input type="number" id="roomVolume">
@@ -192,7 +187,7 @@
 
             <!-- Temporary Works Cost Estimator -->
             <div class="calculator">
-                <h2 class="text-xl font-bold mb-4">Temporary Works Cost Estimator</h2>
+                <h2>Temporary Works Cost Estimator</h2>
                 <div class="input-group">
                     <label for="scaffoldLength">Scaffolding Length (linear m)</label>
                     <input type="number" id="scaffoldLength">
@@ -213,7 +208,7 @@
                     </select>
                 </div>
                 <div class="input-group">
-                    <label><input type="checkbox" id="cdmCompliance" class="mr-2"> CDM 2015 Compliance</label>
+                    <label><input type="checkbox" id="cdmCompliance"> CDM 2015 Compliance</label>
                 </div>
                 <button class="btn" onclick="calculateTempWorks()">Calculate</button>
                 <div class="result" id="tempWorksResult"></div>
@@ -221,7 +216,7 @@
             
             <!-- Preliminaries Calculator -->
             <div class="calculator">
-                <h2 class="text-xl font-bold mb-4">Preliminaries Calculator</h2>
+                <h2>Preliminaries Calculator</h2>
                 <div class="input-group">
                     <label for="portacabins">Number of Portacabins</label>
                     <input type="number" id="portacabins">
@@ -240,7 +235,7 @@
             
             <!-- Earthworks Optimiser -->
             <div class="calculator">
-                <h2 class="text-xl font-bold mb-4">Earthworks Cut/Fill Optimiser</h2>
+                <h2>Earthworks Cut/Fill Optimiser</h2>
                 <div class="input-group">
                     <label for="cutVolume">Cut Volume (m³)</label>
                     <input type="number" id="cutVolume">
@@ -259,7 +254,7 @@
             
             <!-- Life Cycle Costing Tool -->
             <div class="calculator">
-                <h2 class="text-xl font-bold mb-4">Life Cycle Costing Tool</h2>
+                <h2>Life Cycle Costing Tool</h2>
                 <div class="input-group">
                     <label for="initialCost">Initial Cost (£)</label>
                     <input type="number" id="initialCost">
@@ -278,7 +273,7 @@
             
             <!-- NEC Compensation Calculator -->
             <div class="calculator">
-                <h2 class="text-xl font-bold mb-4">NEC Compensation Event Calculator</h2>
+                <h2>NEC Compensation Event Calculator</h2>
                 <div class="input-group">
                     <label for="originalDuration">Original Duration (weeks)</label>
                     <input type="number" id="originalDuration">
@@ -297,7 +292,7 @@
 
             <!-- Rainwater Drainage Calculator -->
             <div class="calculator">
-                <h2 class="text-xl font-bold mb-4">Rainwater Drainage Calculator</h2>
+                <h2>Rainwater Drainage Calculator</h2>
                 <div class="input-group">
                     <label for="roofAreaDrain">Roof Area (m²)</label>
                     <input type="number" id="roofAreaDrain">
@@ -312,7 +307,7 @@
             
             <!-- Part L Compliance Checker -->
             <div class="calculator">
-                <h2 class="text-xl font-bold mb-4">Part L Compliance Checker</h2>
+                <h2>Part L Compliance Checker</h2>
                 <div class="input-group">
                     <label for="wallUValue">Wall U-Value (W/m²K)</label>
                     <input type="number" id="wallUValue" step="0.01">
@@ -327,7 +322,7 @@
             
             <!-- Fire Resistance Calculator -->
             <div class="calculator">
-                <h2 class="text-xl font-bold mb-4">Fire Resistance Calculator</h2>
+                <h2>Fire Resistance Calculator</h2>
                 <div class="input-group">
                     <label for="buildingHeight">Building Height (m)</label>
                     <input type="number" id="buildingHeight">
@@ -345,7 +340,7 @@
             
             <!-- Masonry Calculator -->
             <div class="calculator">
-                <h2 class="text-xl font-bold mb-4">Masonry Calculator</h2>
+                <h2>Masonry Calculator</h2>
                 <div class="input-group">
                     <label for="masonryLength">Wall Length (m)</label>
                     <input type="number" id="masonryLength">
@@ -367,7 +362,7 @@
             
             <!-- Plant Hire Calculator -->
             <div class="calculator">
-                <h2 class="text-xl font-bold mb-4">Plant Hire Calculator</h2>
+                <h2>Plant Hire Calculator</h2>
                 <div class="input-group">
                     <label for="plantType">Plant Type</label>
                     <select id="plantType">
@@ -385,7 +380,7 @@
 
             <!-- Ladder Angle Calculator -->
             <div class="calculator">
-                <h2 class="text-xl font-bold mb-4">Ladder Angle Calculator</h2>
+                <h2>Ladder Angle Calculator</h2>
                 <div class="input-group">
                     <label for="ladderHeight">Ladder Height (m)</label>
                     <input type="number" id="ladderHeight">
@@ -400,7 +395,7 @@
             
             <!-- Screed Calculator -->
             <div class="calculator">
-                <h2 class="text-xl font-bold mb-4">Screed Calculator</h2>
+                <h2>Screed Calculator</h2>
                 <div class="input-group">
                     <label for="screedArea">Floor Area (m²)</label>
                     <input type="number" id="screedArea">
@@ -415,7 +410,7 @@
             
             <!-- Site Noise Assessment -->
             <div class="calculator">
-                <h2 class="text-xl font-bold mb-4">Site Noise Assessment</h2>
+                <h2>Site Noise Assessment</h2>
                 <div class="input-group">
                     <label for="noiseLevel">Noise Level (dB)</label>
                     <input type="number" id="noiseLevel">
@@ -430,15 +425,15 @@
             
             <!-- Construction Phase Plan Checker -->
             <div class="calculator">
-                <h2 class="text-xl font-bold mb-4">Construction Phase Plan Checker</h2>
+                <h2>Construction Phase Plan Checker</h2>
                 <div class="input-group">
-                    <label><input type="checkbox" id="riskAssessment" class="mr-2"> Risk Assessment</label>
+                    <label><input type="checkbox" id="riskAssessment"> Risk Assessment</label>
                 </div>
                 <div class="input-group">
-                    <label><input type="checkbox" id="methodStatement" class="mr-2"> Method Statement</label>
+                    <label><input type="checkbox" id="methodStatement"> Method Statement</label>
                 </div>
                 <div class="input-group">
-                    <label><input type="checkbox" id="welfare" class="mr-2"> Welfare Facilities</label>
+                    <label><input type="checkbox" id="welfare"> Welfare Facilities</label>
                 </div>
                 <button class="btn" onclick="checkPlan()">Verify Plan</button>
                 <div class="result" id="planResult"></div>
@@ -446,7 +441,7 @@
 
             <!-- NEW: Scaffolding Calculator -->
             <div class="calculator">
-                <h2 class="text-xl font-bold mb-4">Scaffolding Calculator</h2>
+                <h2>Scaffolding Calculator</h2>
                 <div class="input-group">
                     <label for="scaffoldRun">Length of Run (m)</label>
                     <input type="number" id="scaffoldRun">
@@ -465,7 +460,7 @@
 
             <!-- NEW: Groundwork Volume Calculator -->
             <div class="calculator">
-                <h2 class="text-xl font-bold mb-4">Groundwork Volume Calculator</h2>
+                <h2>Groundwork Volume Calculator</h2>
                 <div class="input-group">
                     <label for="trenchLength">Trench Length (m)</label>
                     <input type="number" id="trenchLength">
@@ -484,7 +479,7 @@
 
             <!-- NEW: Daywork Rate Calculator -->
             <div class="calculator">
-                <h2 class="text-xl font-bold mb-4">Daywork Rate Calculator</h2>
+                <h2>Daywork Rate Calculator</h2>
                 <div class="input-group">
                     <label for="labourCost">Labour Cost (£)</label>
                     <input type="number" id="labourCost">
@@ -503,7 +498,7 @@
 
             <!-- NEW: Profit & Loss Forecaster -->
             <div class="calculator">
-                <h2 class="text-xl font-bold mb-4">Profit & Loss Forecaster</h2>
+                <h2>Profit & Loss Forecaster</h2>
                 <div class="input-group">
                     <label for="contractValue">Contract Value (£)</label>
                     <input type="number" id="contractValue">
@@ -522,7 +517,7 @@
 
             <!-- NEW: Final Account Statement Generator -->
             <div class="calculator">
-                <h2 class="text-xl font-bold mb-4">Final Account Statement</h2>
+                <h2>Final Account Statement</h2>
                 <div class="input-group">
                     <label for="originalContractSum">Original Contract Sum (£)</label>
                     <input type="number" id="originalContractSum">
@@ -563,8 +558,7 @@
                 return;
             }
             if (riserHeight < 150 || riserHeight > 220) {
-                // Using a less intrusive message box instead of alert()
-                setResult('stairResult', '<span class="text-red-500">Riser height should be between 150-220mm for UK regulations.</span>');
+                setResult('stairResult', '<span style="color: #e74c3c;">Riser height should be between 150-220mm for UK regulations.</span>');
                 return;
             }
 
