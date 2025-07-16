@@ -4,464 +4,592 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The QS Calcs - Quantity Surveying Calculators | Construction Calculators</title>
-    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .calculator {
+            @apply bg-white p-6 rounded-lg shadow-md transition-all duration-300 hover:shadow-lg;
+        }
+        .input-group {
+            @apply mb-4;
+        }
+        .input-group label {
+            @apply block text-gray-700 text-sm font-bold mb-2;
+        }
+        .input-group input, .input-group select {
+            @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline;
+        }
+        .btn {
+            @apply bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline;
+        }
+        .result {
+            @apply mt-4 p-3 bg-gray-100 rounded border border-gray-200;
+        }
+    </style>
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 </head>
-    <header>
-    <div class="creator-note">
-            Created by <a href="https://www.linkedin.com/in/bengoulding" target="_blank" rel="noopener">Ben</a><br>
-            <a href="https://buymeacoffee.com/bengouldins" target="_blank" rel="noopener">Buy me a coffee?</a>
+<body class="bg-gray-50">
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 id="page-title" class="text-3xl font-bold text-gray-800">The Quantity Surveying Calculators</h1>
+                    <p class="text-gray-600"><a href="https://www.theqsdictionary.com/" target="_blank" class="text-blue-500 hover:underline">&#128214; Click here for The QS Dictionary &#128214;</a></p>
+                </div>
+                <div class="text-right">
+                     <p class="text-sm text-gray-500">Created by <a href="https://www.linkedin.com/in/bengoulding" target="_blank" rel="noopener" class="text-blue-500 hover:underline">Ben</a></p>
+                     <a href="https://buymeacoffee.com/bengouldins" target="_blank" rel="noopener" class="text-sm text-blue-500 hover:underline">Buy me a coffee?</a>
+                </div>
+            </div>
         </div>
-    <div class="header-content">
-        <h1 id="page-title">The Quantity Surveying Calculators</h1>
-        <p class="last-updated"><a href="https://www.theqsdictionary.com/" target="_blank">&#128214; Click here for The QS Dictionary &#128214;</a></p>
-    </div>
         <script data-goatcounter="https://191186.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-</header>
-<body>
-    <div class="container">
-        <div class="calculators-grid">
+    </header>
+    <main class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <!-- Stair Design Calculator -->
             <div class="calculator">
-                <h2>Stair Design Calculator</h2>
+                <h2 class="text-xl font-bold mb-4">Stair Design Calculator</h2>
                 <div class="input-group">
-                    <label>Total Height (mm)</label>
+                    <label for="totalHeight">Total Height (mm)</label>
                     <input type="number" id="totalHeight">
                 </div>
                 <div class="input-group">
-                    <label>Desired Riser Height (mm)</label>
+                    <label for="riserHeight">Desired Riser Height (mm)</label>
                     <input type="number" id="riserHeight" value="175">
                 </div>
-                <button onclick="calculateStairs()">Calculate</button>
+                <button class="btn" onclick="calculateStairs()">Calculate</button>
                 <div class="result" id="stairResult"></div>
             </div>
 
             <!-- Structural Load Calculator -->
             <div class="calculator">
-                <h2>Structural Load Calculator</h2>
+                <h2 class="text-xl font-bold mb-4">Structural Load Calculator</h2>
                 <div class="input-group">
-                    <label>Floor Area (m²)</label>
+                    <label for="floorArea">Floor Area (m²)</label>
                     <input type="number" id="floorArea">
                 </div>
                 <div class="input-group">
-                    <label>Load per m² (kN/m²)</label>
+                    <label for="loadPerSqm">Load per m² (kN/m²)</label>
                     <input type="number" id="loadPerSqm" value="2.5">
                 </div>
-                <button onclick="calculateLoad()">Calculate</button>
+                <button class="btn" onclick="calculateLoad()">Calculate</button>
                 <div class="result" id="loadResult"></div>
             </div>
 
             <!-- Brick Estimator -->
             <div class="calculator">
-                <h2>Brick Estimator</h2>
+                <h2 class="text-xl font-bold mb-4">Brick Estimator</h2>
                 <div class="input-group">
-                    <label>Wall Length (m)</label>
+                    <label for="wallLength">Wall Length (m)</label>
                     <input type="number" id="wallLength">
                 </div>
                 <div class="input-group">
-                    <label>Wall Height (m)</label>
+                    <label for="wallHeight">Wall Height (m)</label>
                     <input type="number" id="wallHeight">
                 </div>
-                <button onclick="calculateBricks()">Calculate</button>
+                <button class="btn" onclick="calculateBricks()">Calculate</button>
                 <div class="result" id="brickResult"></div>
             </div>
 
             <!-- Paint Calculator -->
             <div class="calculator">
-                <h2>Paint Calculator</h2>
+                <h2 class="text-xl font-bold mb-4">Paint Calculator</h2>
                 <div class="input-group">
-                    <label>Wall Area (m²)</label>
+                    <label for="paintArea">Wall Area (m²)</label>
                     <input type="number" id="paintArea">
                 </div>
                 <div class="input-group">
-                    <label>Number of Coats</label>
+                    <label for="coats">Number of Coats</label>
                     <input type="number" id="coats" value="2">
                 </div>
-                <button onclick="calculatePaint()">Calculate</button>
+                <button class="btn" onclick="calculatePaint()">Calculate</button>
                 <div class="result" id="paintResult"></div>
             </div>
 
             <!-- Concrete Volume Calculator -->
             <div class="calculator">
-                <h2>Concrete Volume</h2>
+                <h2 class="text-xl font-bold mb-4">Concrete Volume</h2>
                 <div class="input-group">
-                    <label>Length (m)</label>
+                    <label for="concreteLength">Length (m)</label>
                     <input type="number" id="concreteLength">
                 </div>
                 <div class="input-group">
-                    <label>Width (m)</label>
+                    <label for="concreteWidth">Width (m)</label>
                     <input type="number" id="concreteWidth">
                 </div>
                 <div class="input-group">
-                    <label>Depth (mm)</label>
+                    <label for="concreteDepth">Depth (mm)</label>
                     <input type="number" id="concreteDepth">
                 </div>
-                <button onclick="calculateConcrete()">Calculate</button>
+                <button class="btn" onclick="calculateConcrete()">Calculate</button>
                 <div class="result" id="concreteResult"></div>
             </div>
 
             <!-- Beam Span Calculator -->
             <div class="calculator">
-                <h2>Beam Span Calculator</h2>
+                <h2 class="text-xl font-bold mb-4">Beam Span Calculator</h2>
                 <div class="input-group">
-                    <label>Span (m)</label>
+                    <label for="beamSpan">Span (m)</label>
                     <input type="number" id="beamSpan">
                 </div>
                 <div class="input-group">
-                    <label>Load (kN/m)</label>
+                    <label for="beamLoad">Load (kN/m)</label>
                     <input type="number" id="beamLoad">
                 </div>
-                <button onclick="calculateBeam()">Calculate</button>
+                <button class="btn" onclick="calculateBeam()">Calculate</button>
                 <div class="result" id="beamResult"></div>
             </div>
             
             <!-- Roofing Calculator -->
             <div class="calculator">
-                <h2>Roofing Calculator</h2>
+                <h2 class="text-xl font-bold mb-4">Roofing Calculator</h2>
                 <div class="input-group">
-                    <label>Roof Area (m²)</label>
+                    <label for="roofArea">Roof Area (m²)</label>
                     <input type="number" id="roofArea">
                 </div>
                 <div class="input-group">
-                    <label>Tile Coverage (tiles/m²)</label>
+                    <label for="tileCoverage">Tile Coverage (tiles/m²)</label>
                     <input type="number" id="tileCoverage" value="10">
                 </div>
-                <button onclick="calculateRoof()">Calculate</button>
+                <button class="btn" onclick="calculateRoof()">Calculate</button>
                 <div class="result" id="roofResult"></div>
             </div>
             
             <!-- Plasterboard Calculator -->
             <div class="calculator">
-                <h2>Plasterboard Calculator</h2>
+                <h2 class="text-xl font-bold mb-4">Plasterboard Calculator</h2>
                 <div class="input-group">
-                    <label>Ceiling/Wall Area (m²)</label>
+                    <label for="plasterArea">Ceiling/Wall Area (m²)</label>
                     <input type="number" id="plasterArea">
                 </div>
                 <div class="input-group">
-                    <label>Board Size (m²)</label>
+                    <label for="boardSize">Board Size (m²)</label>
                     <input type="number" id="boardSize" value="2.88">
                 </div>
-                <button onclick="calculatePlasterboard()">Calculate</button>
+                <button class="btn" onclick="calculatePlasterboard()">Calculate</button>
                 <div class="result" id="plasterResult"></div>
             </div>
             
             <!-- Skip Hire Calculator -->
             <div class="calculator">
-                <h2>Skip Hire Estimator</h2>
+                <h2 class="text-xl font-bold mb-4">Skip Hire Estimator</h2>
                 <div class="input-group">
-                    <label>Waste Volume (m³)</label>
+                    <label for="wasteVolume">Waste Volume (m³)</label>
                     <input type="number" id="wasteVolume">
                 </div>
-                <button onclick="calculateSkip()">Calculate</button>
+                <button class="btn" onclick="calculateSkip()">Calculate</button>
                 <div class="result" id="skipResult"></div>
             </div>
             
             <!-- Insulation Calculator -->
             <div class="calculator">
-                <h2>Insulation Calculator</h2>
+                <h2 class="text-xl font-bold mb-4">Insulation Calculator</h2>
                 <div class="input-group">
-                    <label>Wall Area (m²)</label>
+                    <label for="insulationArea">Wall Area (m²)</label>
                     <input type="number" id="insulationArea">
                 </div>
                 <div class="input-group">
-                    <label>Roll Coverage (m²)</label>
+                    <label for="rollCoverage">Roll Coverage (m²)</label>
                     <input type="number" id="rollCoverage" value="10">
                 </div>
-                <button onclick="calculateInsulation()">Calculate</button>
+                <button class="btn" onclick="calculateInsulation()">Calculate</button>
                 <div class="result" id="insulationResult"></div>
             </div>
             
             <!-- Ventilation Calculator -->
             <div class="calculator">
-                <h2>Ventilation Calculator</h2>
+                <h2 class="text-xl font-bold mb-4">Ventilation Calculator</h2>
                 <div class="input-group">
-                    <label>Room Volume (m³)</label>
+                    <label for="roomVolume">Room Volume (m³)</label>
                     <input type="number" id="roomVolume">
                 </div>
                 <div class="input-group">
-                    <label>Occupants</label>
-                    <input type="number" id="occupants">
+                    <label for="occupants">Occupants</label>
+                    <input type="number" id="occupantsVent">
                 </div>
-                <button onclick="calculateVentilation()">Calculate</button>
+                <button class="btn" onclick="calculateVentilation()">Calculate</button>
                 <div class="result" id="ventilationResult"></div>
             </div>
 
             <!-- Temporary Works Cost Estimator -->
             <div class="calculator">
-                <h2>Temporary Works Cost Estimator</h2>
+                <h2 class="text-xl font-bold mb-4">Temporary Works Cost Estimator</h2>
                 <div class="input-group">
-                    <label>Scaffolding Length (linear m)</label>
+                    <label for="scaffoldLength">Scaffolding Length (linear m)</label>
                     <input type="number" id="scaffoldLength">
                 </div>
                 <div class="input-group">
-                    <label>Height Zones</label>
+                    <label for="heightZones">Height Zones</label>
                     <input type="number" id="heightZones" value="1">
                 </div>
                 <div class="input-group">
-                    <label>Hoarding Length (m)</label>
+                    <label for="hoardingLength">Hoarding Length (m)</label>
                     <input type="number" id="hoardingLength">
                 </div>
                 <div class="input-group">
-                    <label>Material Type</label>
+                    <label for="hoardingMaterial">Material Type</label>
                     <select id="hoardingMaterial">
                         <option value="timber">Timber</option>
                         <option value="steel">Steel</option>
                     </select>
                 </div>
                 <div class="input-group">
-                    <label><input type="checkbox" id="cdmCompliance"> CDM 2015 Compliance</label>
+                    <label><input type="checkbox" id="cdmCompliance" class="mr-2"> CDM 2015 Compliance</label>
                 </div>
-                <button onclick="calculateTempWorks()">Calculate</button>
+                <button class="btn" onclick="calculateTempWorks()">Calculate</button>
                 <div class="result" id="tempWorksResult"></div>
             </div>
             
             <!-- Preliminaries Calculator -->
             <div class="calculator">
-                <h2>Preliminaries Calculator</h2>
+                <h2 class="text-xl font-bold mb-4">Preliminaries Calculator</h2>
                 <div class="input-group">
-                    <label>Number of Portacabins</label>
+                    <label for="portacabins">Number of Portacabins</label>
                     <input type="number" id="portacabins">
                 </div>
                 <div class="input-group">
-                    <label>Crane Hire Weeks</label>
+                    <label for="craneWeeks">Crane Hire Weeks</label>
                     <input type="number" id="craneWeeks">
                 </div>
                 <div class="input-group">
-                    <label>Site Area (hectares)</label>
+                    <label for="siteArea">Site Area (hectares)</label>
                     <input type="number" id="siteArea">
                 </div>
-                <button onclick="calculatePreliminaries()">Calculate</button>
+                <button class="btn" onclick="calculatePreliminaries()">Calculate</button>
                 <div class="result" id="prelimResult"></div>
             </div>
             
             <!-- Earthworks Optimiser -->
             <div class="calculator">
-                <h2>Earthworks Cut/Fill Optimiser</h2>
+                <h2 class="text-xl font-bold mb-4">Earthworks Cut/Fill Optimiser</h2>
                 <div class="input-group">
-                    <label>Cut Volume (m³)</label>
+                    <label for="cutVolume">Cut Volume (m³)</label>
                     <input type="number" id="cutVolume">
                 </div>
                 <div class="input-group">
-                    <label>Fill Volume (m³)</label>
+                    <label for="fillVolume">Fill Volume (m³)</label>
                     <input type="number" id="fillVolume">
                 </div>
                 <div class="input-group">
-                    <label>Haul Distance (km)</label>
+                    <label for="haulDistance">Haul Distance (km)</label>
                     <input type="number" id="haulDistance">
                 </div>
-                <button onclick="calculateEarthworks()">Calculate</button>
+                <button class="btn" onclick="calculateEarthworks()">Calculate</button>
                 <div class="result" id="earthworksResult"></div>
             </div>
             
             <!-- Life Cycle Costing Tool -->
             <div class="calculator">
-                <h2>Life Cycle Costing Tool</h2>
+                <h2 class="text-xl font-bold mb-4">Life Cycle Costing Tool</h2>
                 <div class="input-group">
-                    <label>Initial Cost (£)</label>
+                    <label for="initialCost">Initial Cost (£)</label>
                     <input type="number" id="initialCost">
                 </div>
                 <div class="input-group">
-                    <label>Lifespan (years)</label>
+                    <label for="lifespan">Lifespan (years)</label>
                     <input type="number" id="lifespan" value="25">
                 </div>
                 <div class="input-group">
-                    <label>Annual Maintenance (£)</label>
+                    <label for="maintenance">Annual Maintenance (£)</label>
                     <input type="number" id="maintenance">
                 </div>
-                <button onclick="calculateLifeCycle()">Calculate</button>
+                <button class="btn" onclick="calculateLifeCycle()">Calculate</button>
                 <div class="result" id="lifecycleResult"></div>
             </div>
             
             <!-- NEC Compensation Calculator -->
             <div class="calculator">
-                <h2>NEC Compensation Event Calculator</h2>
+                <h2 class="text-xl font-bold mb-4">NEC Compensation Event Calculator</h2>
                 <div class="input-group">
-                    <label>Original Duration (weeks)</label>
+                    <label for="originalDuration">Original Duration (weeks)</label>
                     <input type="number" id="originalDuration">
                 </div>
                 <div class="input-group">
-                    <label>Delay (weeks)</label>
+                    <label for="delayWeeks">Delay (weeks)</label>
                     <input type="number" id="delayWeeks">
                 </div>
                 <div class="input-group">
-                    <label>Additional Resources (£)</label>
+                    <label for="additionalCost">Additional Resources (£)</label>
                     <input type="number" id="additionalCost">
                 </div>
-                <button onclick="calculateNEC()">Calculate</button>
+                <button class="btn" onclick="calculateNEC()">Calculate</button>
                 <div class="result" id="necResult"></div>
             </div>
+
             <!-- Rainwater Drainage Calculator -->
             <div class="calculator">
-                <h2>Rainwater Drainage Calculator</h2>
+                <h2 class="text-xl font-bold mb-4">Rainwater Drainage Calculator</h2>
                 <div class="input-group">
-                    <label>Roof Area (m²)</label>
+                    <label for="roofAreaDrain">Roof Area (m²)</label>
                     <input type="number" id="roofAreaDrain">
                 </div>
                 <div class="input-group">
-                    <label>Rainfall Intensity (mm/hr)</label>
+                    <label for="rainfall">Rainfall Intensity (mm/hr)</label>
                     <input type="number" id="rainfall" value="75">
                 </div>
-                <button onclick="calculateDrainage()">Calculate</button>
+                <button class="btn" onclick="calculateDrainage()">Calculate</button>
                 <div class="result" id="drainageResult"></div>
             </div>
             
             <!-- Part L Compliance Checker -->
             <div class="calculator">
-                <h2>Part L Compliance Checker</h2>
+                <h2 class="text-xl font-bold mb-4">Part L Compliance Checker</h2>
                 <div class="input-group">
-                    <label>Wall U-Value (W/m²K)</label>
+                    <label for="wallUValue">Wall U-Value (W/m²K)</label>
                     <input type="number" id="wallUValue" step="0.01">
                 </div>
                 <div class="input-group">
-                    <label>Window U-Value (W/m²K)</label>
+                    <label for="windowUValue">Window U-Value (W/m²K)</label>
                     <input type="number" id="windowUValue" step="0.1" value="1.6">
                 </div>
-                <button onclick="checkPartL()">Check Compliance</button>
+                <button class="btn" onclick="checkPartL()">Check Compliance</button>
                 <div class="result" id="partLResult"></div>
             </div>
             
             <!-- Fire Resistance Calculator -->
             <div class="calculator">
-                <h2>Fire Resistance Calculator</h2>
+                <h2 class="text-xl font-bold mb-4">Fire Resistance Calculator</h2>
                 <div class="input-group">
-                    <label>Building Height (m)</label>
+                    <label for="buildingHeight">Building Height (m)</label>
                     <input type="number" id="buildingHeight">
                 </div>
                 <div class="input-group">
-                    <label>Building Type</label>
+                    <label for="buildingType">Building Type</label>
                     <select id="buildingType">
                         <option value="residential">Residential</option>
                         <option value="commercial">Commercial</option>
                     </select>
                 </div>
-                <button onclick="calculateFireResistance()">Calculate</button>
+                <button class="btn" onclick="calculateFireResistance()">Calculate</button>
                 <div class="result" id="fireResult"></div>
             </div>
             
             <!-- Masonry Calculator -->
             <div class="calculator">
-                <h2>Masonry Calculator</h2>
+                <h2 class="text-xl font-bold mb-4">Masonry Calculator</h2>
                 <div class="input-group">
-                    <label>Wall Length (m)</label>
+                    <label for="masonryLength">Wall Length (m)</label>
                     <input type="number" id="masonryLength">
                 </div>
                 <div class="input-group">
-                    <label>Wall Height (m)</label>
+                    <label for="masonryHeight">Wall Height (m)</label>
                     <input type="number" id="masonryHeight">
                 </div>
                 <div class="input-group">
-                    <label>Block Type</label>
+                    <label for="blockType">Block Type</label>
                     <select id="blockType">
                         <option value="7N">7N Solid</option>
                         <option value="10N">10N Hollow</option>
                     </select>
                 </div>
-                <button onclick="calculateMasonry()">Calculate</button>
+                <button class="btn" onclick="calculateMasonry()">Calculate</button>
                 <div class="result" id="masonryResult"></div>
             </div>
             
             <!-- Plant Hire Calculator -->
             <div class="calculator">
-                <h2>Plant Hire Calculator</h2>
+                <h2 class="text-xl font-bold mb-4">Plant Hire Calculator</h2>
                 <div class="input-group">
-                    <label>Plant Type</label>
+                    <label for="plantType">Plant Type</label>
                     <select id="plantType">
                         <option value="excavator">360° Excavator</option>
                         <option value="dumper">Dumper Truck</option>
                     </select>
                 </div>
                 <div class="input-group">
-                    <label>Hire Duration (days)</label>
+                    <label for="hireDays">Hire Duration (days)</label>
                     <input type="number" id="hireDays">
                 </div>
-                <button onclick="calculatePlantHire()">Calculate</button>
+                <button class="btn" onclick="calculatePlantHire()">Calculate</button>
                 <div class="result" id="plantResult"></div>
             </div>
 
-                        <!-- 1. Ladder Angle Calculator -->
+            <!-- Ladder Angle Calculator -->
             <div class="calculator">
-                <h2>Ladder Angle Calculator</h2>
+                <h2 class="text-xl font-bold mb-4">Ladder Angle Calculator</h2>
                 <div class="input-group">
-                    <label>Ladder Height (m)</label>
+                    <label for="ladderHeight">Ladder Height (m)</label>
                     <input type="number" id="ladderHeight">
                 </div>
                 <div class="input-group">
-                    <label>Base Distance (m)</label>
+                    <label for="baseDistance">Base Distance (m)</label>
                     <input type="number" id="baseDistance">
                 </div>
-                <button onclick="calculateLadderAngle()">Check Safety</button>
+                <button class="btn" onclick="calculateLadderAngle()">Check Safety</button>
                 <div class="result" id="ladderResult"></div>
             </div>
             
-            <!-- 2. Screed Calculator -->
+            <!-- Screed Calculator -->
             <div class="calculator">
-                <h2>Screed Calculator</h2>
+                <h2 class="text-xl font-bold mb-4">Screed Calculator</h2>
                 <div class="input-group">
-                    <label>Floor Area (m²)</label>
+                    <label for="screedArea">Floor Area (m²)</label>
                     <input type="number" id="screedArea">
                 </div>
                 <div class="input-group">
-                    <label>Thickness (mm)</label>
+                    <label for="screedThickness">Thickness (mm)</label>
                     <input type="number" id="screedThickness" value="75">
                 </div>
-                <button onclick="calculateScreed()">Calculate</button>
+                <button class="btn" onclick="calculateScreed()">Calculate</button>
                 <div class="result" id="screedResult"></div>
             </div>
             
-            <!-- 3. Site Noise Assessment -->
+            <!-- Site Noise Assessment -->
             <div class="calculator">
-                <h2>Site Noise Assessment</h2>
+                <h2 class="text-xl font-bold mb-4">Site Noise Assessment</h2>
                 <div class="input-group">
-                    <label>Noise Level (dB)</label>
+                    <label for="noiseLevel">Noise Level (dB)</label>
                     <input type="number" id="noiseLevel">
                 </div>
                 <div class="input-group">
-                    <label>Exposure Time (hrs)</label>
+                    <label for="exposureTime">Exposure Time (hrs)</label>
                     <input type="number" id="exposureTime">
                 </div>
-                <button onclick="calculateNoise()">Assess Risk</button>
+                <button class="btn" onclick="calculateNoise()">Assess Risk</button>
                 <div class="result" id="noiseResult"></div>
             </div>
             
-            <!-- 4. Ventilation Rate Calculator -->
+            <!-- Construction Phase Plan Checker -->
             <div class="calculator">
-                <h2>Ventilation Rate Calculator</h2>
+                <h2 class="text-xl font-bold mb-4">Construction Phase Plan Checker</h2>
                 <div class="input-group">
-                    <label>Room Volume (m³)</label>
-                    <input type="number" id="ventVolume">
+                    <label><input type="checkbox" id="riskAssessment" class="mr-2"> Risk Assessment</label>
                 </div>
                 <div class="input-group">
-                    <label>Occupancy</label>
-                    <input type="number" id="occupants">
-                </div>
-                <button onclick="calculateVentilation()">Calculate</button>
-                <div class="result" id="ventResult"></div>
-            </div>
-            
-            <!-- 5. Construction Phase Plan Checker -->
-            <div class="calculator">
-                <h2>Construction Phase Plan Checker</h2>
-                <div class="input-group">
-                    <label><input type="checkbox" id="riskAssessment"> Risk Assessment</label>
+                    <label><input type="checkbox" id="methodStatement" class="mr-2"> Method Statement</label>
                 </div>
                 <div class="input-group">
-                    <label><input type="checkbox" id="methodStatement"> Method Statement</label>
+                    <label><input type="checkbox" id="welfare" class="mr-2"> Welfare Facilities</label>
                 </div>
-                <div class="input-group">
-                    <label><input type="checkbox" id="welfare"> Welfare Facilities</label>
-                </div>
-                <button onclick="checkPlan()">Verify Plan</button>
+                <button class="btn" onclick="checkPlan()">Verify Plan</button>
                 <div class="result" id="planResult"></div>
             </div>
+
+            <!-- NEW: Scaffolding Calculator -->
+            <div class="calculator">
+                <h2 class="text-xl font-bold mb-4">Scaffolding Calculator</h2>
+                <div class="input-group">
+                    <label for="scaffoldRun">Length of Run (m)</label>
+                    <input type="number" id="scaffoldRun">
+                </div>
+                <div class="input-group">
+                    <label for="scaffoldLifts">Number of Lifts</label>
+                    <input type="number" id="scaffoldLifts" value="1">
+                </div>
+                <div class="input-group">
+                    <label for="boardedLifts">Boarded Lifts</label>
+                    <input type="number" id="boardedLifts" value="1">
+                </div>
+                <button class="btn" onclick="calculateScaffolding()">Calculate Materials</button>
+                <div class="result" id="scaffoldResult"></div>
+            </div>
+
+            <!-- NEW: Groundwork Volume Calculator -->
+            <div class="calculator">
+                <h2 class="text-xl font-bold mb-4">Groundwork Volume Calculator</h2>
+                <div class="input-group">
+                    <label for="trenchLength">Trench Length (m)</label>
+                    <input type="number" id="trenchLength">
+                </div>
+                <div class="input-group">
+                    <label for="trenchWidth">Trench Width (m)</label>
+                    <input type="number" id="trenchWidth">
+                </div>
+                <div class="input-group">
+                    <label for="trenchDepth">Trench Depth (m)</label>
+                    <input type="number" id="trenchDepth">
+                </div>
+                <button class="btn" onclick="calculateGroundwork()">Calculate Volume</button>
+                <div class="result" id="groundworkResult"></div>
+            </div>
+
+            <!-- NEW: Daywork Rate Calculator -->
+            <div class="calculator">
+                <h2 class="text-xl font-bold mb-4">Daywork Rate Calculator</h2>
+                <div class="input-group">
+                    <label for="labourCost">Labour Cost (£)</label>
+                    <input type="number" id="labourCost">
+                </div>
+                <div class="input-group">
+                    <label for="materialCost">Material Cost (£)</label>
+                    <input type="number" id="materialCost">
+                </div>
+                <div class="input-group">
+                    <label for="overheadPercentage">Overhead & Profit (%)</label>
+                    <input type="number" id="overheadPercentage" value="15">
+                </div>
+                <button class="btn" onclick="calculateDaywork()">Calculate Total</button>
+                <div class="result" id="dayworkResult"></div>
+            </div>
+
+            <!-- NEW: Profit & Loss Forecaster -->
+            <div class="calculator">
+                <h2 class="text-xl font-bold mb-4">Profit & Loss Forecaster</h2>
+                <div class="input-group">
+                    <label for="contractValue">Contract Value (£)</label>
+                    <input type="number" id="contractValue">
+                </div>
+                <div class="input-group">
+                    <label for="estimatedCosts">Estimated Costs (£)</label>
+                    <input type="number" id="estimatedCosts">
+                </div>
+                <div class="input-group">
+                    <label for="costsToDate">Costs to Date (£)</label>
+                    <input type="number" id="costsToDate">
+                </div>
+                <button class="btn" onclick="calculateProfitLoss()">Forecast P&L</button>
+                <div class="result" id="profitLossResult"></div>
+            </div>
+
+            <!-- NEW: Final Account Statement Generator -->
+            <div class="calculator">
+                <h2 class="text-xl font-bold mb-4">Final Account Statement</h2>
+                <div class="input-group">
+                    <label for="originalContractSum">Original Contract Sum (£)</label>
+                    <input type="number" id="originalContractSum">
+                </div>
+                <div class="input-group">
+                    <label for="netVariations">Net Variations (£)</label>
+                    <input type="number" id="netVariations">
+                </div>
+                <div class="input-group">
+                    <label for="paymentsReceived">Payments Received (£)</label>
+                    <input type="number" id="paymentsReceived">
+                </div>
+                <button class="btn" onclick="generateFinalAccount()">Generate Statement</button>
+                <div class="result" id="finalAccountResult"></div>
+            </div>
+
         </div>
-    </div>
+    </main>
 
     <script>
+        // General purpose function to get numeric value from an element
+        function getVal(id) {
+            const value = parseFloat(document.getElementById(id).value);
+            return isNaN(value) ? 0 : value;
+        }
+
+        // General purpose function to set innerHTML of an element
+        function setResult(id, html) {
+            document.getElementById(id).innerHTML = html;
+        }
+
         function calculateStairs() {
-            const totalHeight = parseFloat(document.getElementById('totalHeight').value);
-            const riserHeight = parseFloat(document.getElementById('riserHeight').value);
+            const totalHeight = getVal('totalHeight');
+            const riserHeight = getVal('riserHeight');
             
+            if (totalHeight === 0) {
+                setResult('stairResult', 'Please enter a total height.');
+                return;
+            }
             if (riserHeight < 150 || riserHeight > 220) {
-                alert("Riser height should be between 150-220mm for UK regulations");
+                // Using a less intrusive message box instead of alert()
+                setResult('stairResult', '<span class="text-red-500">Riser height should be between 150-220mm for UK regulations.</span>');
                 return;
             }
 
@@ -469,155 +597,142 @@
             const actualRiserHeight = totalHeight / numberOfRisers;
             const numberOfTreads = numberOfRisers - 1;
 
-            document.getElementById('stairResult').innerHTML = 
+            setResult('stairResult', 
                 `Risers: ${numberOfRisers} @ ${actualRiserHeight.toFixed(1)}mm<br>
-                 Treads: ${numberOfTreads} (recommended 250-300mm)`;
+                 Treads: ${numberOfTreads} (recommended 250-300mm)`);
         }
 
         function calculateLoad() {
-            const area = parseFloat(document.getElementById('floorArea').value);
-            const load = parseFloat(document.getElementById('loadPerSqm').value);
+            const area = getVal('floorArea');
+            const load = getVal('loadPerSqm');
             const totalLoad = (area * load).toFixed(1);
-            document.getElementById('loadResult').textContent = 
-                `Total Load: ${totalLoad} kN`;
+            setResult('loadResult', `Total Load: ${totalLoad} kN`);
         }
 
         function calculateBricks() {
-            const length = parseFloat(document.getElementById('wallLength').value);
-            const height = parseFloat(document.getElementById('wallHeight').value);
-            const bricks = Math.ceil((length * height) * 60); // 60 bricks per m²
-            document.getElementById('brickResult').textContent = 
-                `Approx. ${bricks} bricks needed (including 5% waste)`;
+            const length = getVal('wallLength');
+            const height = getVal('wallHeight');
+            const bricks = Math.ceil((length * height) * 60 * 1.05); // 60 bricks per m² + 5% waste
+            setResult('brickResult', `Approx. ${bricks} bricks needed (incl. 5% waste)`);
         }
 
         function calculatePaint() {
-            const area = parseFloat(document.getElementById('paintArea').value);
-            const coats = parseFloat(document.getElementById('coats').value);
+            const area = getVal('paintArea');
+            const coats = getVal('coats');
             const litres = (area * coats / 12).toFixed(1); // 12m² per litre
-            document.getElementById('paintResult').textContent = 
-                `Required: ${litres} litres`;
+            setResult('paintResult', `Required: ${litres} litres`);
         }
 
         function calculateConcrete() {
-            const length = parseFloat(document.getElementById('concreteLength').value);
-            const width = parseFloat(document.getElementById('concreteWidth').value);
-            const depth = parseFloat(document.getElementById('concreteDepth').value) / 1000;
+            const length = getVal('concreteLength');
+            const width = getVal('concreteWidth');
+            const depth = getVal('concreteDepth') / 1000;
             const volume = (length * width * depth).toFixed(2);
-            document.getElementById('concreteResult').textContent = 
-                `Volume: ${volume} m³`;
+            setResult('concreteResult', `Volume: ${volume} m³`);
         }
 
         function calculateBeam() {
-            const span = parseFloat(document.getElementById('beamSpan').value);
-            const load = parseFloat(document.getElementById('beamLoad').value);
+            const span = getVal('beamSpan');
+            const load = getVal('beamLoad');
             // Simplified formula for demonstration
             const depth = (span * 1000 / 20).toFixed(0); 
-            document.getElementById('beamResult').textContent = 
-                `Minimum depth: ~${depth}mm (consult engineer)`;
+            setResult('beamResult', `Minimum depth: ~${depth}mm (consult engineer)`);
         }
-                // Roofing Calculator
+        
         function calculateRoof() {
-            const area = parseFloat(document.getElementById('roofArea').value);
-            const coverage = parseFloat(document.getElementById('tileCoverage').value);
+            const area = getVal('roofArea');
+            const coverage = getVal('tileCoverage');
             const tiles = Math.ceil(area * coverage * 1.1); // 10% waste
-            document.getElementById('roofResult').textContent = 
-                `${tiles} tiles needed (including 10% waste)`;
+            setResult('roofResult', `${tiles} tiles needed (incl. 10% waste)`);
         }
         
-        // Plasterboard Calculator
         function calculatePlasterboard() {
-            const area = parseFloat(document.getElementById('plasterArea').value);
-            const boardSize = parseFloat(document.getElementById('boardSize').value);
+            const area = getVal('plasterArea');
+            const boardSize = getVal('boardSize');
+            if (boardSize === 0) {
+                 setResult('plasterResult', 'Board size cannot be zero.');
+                 return;
+            }
             const boards = Math.ceil(area / boardSize * 1.1); // 10% waste
-            document.getElementById('plasterResult').textContent = 
-                `${boards} boards needed (standard 2.4x1.2m boards)`;
+            setResult('plasterResult', `${boards} boards needed (standard 2.4x1.2m boards)`);
         }
         
-        // Skip Hire Calculator
         function calculateSkip() {
-            const volume = parseFloat(document.getElementById('wasteVolume').value);
+            const volume = getVal('wasteVolume');
             const sizes = {
-                "2 yard": 1.5,
-                "4 yard": 3,
-                "6 yard": 4.5,
-                "8 yard": 6
+                "2 yard": 1.5, "4 yard": 3, "6 yard": 4.5, "8 yard": 6, "12 yard": 9, "16 yard": 12
             };
-            let recommended = "8 yard";
+            let recommended = "16 yard+";
             for(const [size, capacity] of Object.entries(sizes)) {
                 if(volume <= capacity) {
                     recommended = size;
                     break;
                 }
             }
-            document.getElementById('skipResult').textContent = 
-                `Recommended: ${recommended} skip (${sizes[recommended]}m³)`;
+            setResult('skipResult', `Recommended: ${recommended} skip`);
         }
         
-        // Insulation Calculator
         function calculateInsulation() {
-            const area = parseFloat(document.getElementById('insulationArea').value);
-            const coverage = parseFloat(document.getElementById('rollCoverage').value);
+            const area = getVal('insulationArea');
+            const coverage = getVal('rollCoverage');
+            if(coverage === 0) {
+                setResult('insulationResult', 'Roll coverage cannot be zero.');
+                return;
+            }
             const rolls = Math.ceil(area / coverage * 1.1); // 10% waste
-            document.getElementById('insulationResult').textContent = 
-                `${rolls} rolls needed (100mm mineral wool)`;
+            setResult('insulationResult', `${rolls} rolls needed (100mm mineral wool)`);
         }
         
-        // Ventilation Calculator
         function calculateVentilation() {
-            const volume = parseFloat(document.getElementById('roomVolume').value);
-            const people = parseFloat(document.getElementById('occupants').value);
-            const airflow = Math.max(volume * 0.5, people * 10); // UK Building Regs
-            document.getElementById('ventilationResult').textContent = 
-                `Required: ${airflow.toFixed(1)} m³/hr fresh air`;
+            const volume = getVal('roomVolume');
+            const people = getVal('occupantsVent');
+            const airflow = Math.max(volume * 0.5, people * 10).toFixed(1); // UK Building Regs
+            setResult('ventilationResult', `Required: ${airflow} m³/hr fresh air`);
         }
 
-        // Temporary Works Calculator
         function calculateTempWorks() {
-            const scaffLength = parseFloat(document.getElementById('scaffoldLength').value);
-            const zones = parseFloat(document.getElementById('heightZones').value);
-            const hoardingLength = parseFloat(document.getElementById('hoardingLength').value);
+            const scaffLength = getVal('scaffoldLength');
+            const zones = getVal('heightZones');
+            const hoardingLength = getVal('hoardingLength');
             const material = document.getElementById('hoardingMaterial').value;
             const cdmCompliance = document.getElementById('cdmCompliance').checked;
         
-            // Cost calculations
             let scaffCost = scaffLength * 35 * zones;
             let hoardingCost = hoardingLength * (material === 'timber' ? 120 : 200);
             let cdmCost = cdmCompliance ? 2500 : 0;
             let total = scaffCost + hoardingCost + cdmCost;
         
-            document.getElementById('tempWorksResult').innerHTML = `
+            setResult('tempWorksResult', `
                 Scaffolding: £${scaffCost.toLocaleString()}<br>
                 Hoarding: £${hoardingCost.toLocaleString()}<br>
                 CDM Compliance: £${cdmCost.toLocaleString()}<br>
                 <strong>Total: £${total.toLocaleString()}</strong>
-            `;
+            `);
         }
         
-        // Preliminaries Calculator
         function calculatePreliminaries() {
-            const cabins = parseFloat(document.getElementById('portacabins').value);
-            const craneWeeks = parseFloat(document.getElementById('craneWeeks').value);
-            const area = parseFloat(document.getElementById('siteArea').value);
+            const cabins = getVal('portacabins');
+            const craneWeeks = getVal('craneWeeks');
+            const area = getVal('siteArea');
         
             const cabinCost = cabins * 4500;
             const craneCost = craneWeeks * (2500 + 1200); // Crane + operator
             const utilities = area * 1500;
             const total = cabinCost + craneCost + utilities;
         
-            document.getElementById('prelimResult').innerHTML = `
+            setResult('prelimResult', `
                 NEC4 Breakdown:<br>
                 - Site Setup: £${cabinCost.toLocaleString()}<br>
                 - Plant Hire: £${craneCost.toLocaleString()}<br>
                 - Utilities: £${utilities.toLocaleString()}<br>
                 <strong>Total Prelims: £${total.toLocaleString()}</strong>
-            `;
+            `);
         }
         
-        // Earthworks Optimiser
         function calculateEarthworks() {
-            const cut = parseFloat(document.getElementById('cutVolume').value);
-            const fill = parseFloat(document.getElementById('fillVolume').value);
-            const haul = parseFloat(document.getElementById('haulDistance').value);
+            const cut = getVal('cutVolume');
+            const fill = getVal('fillVolume');
+            const haul = getVal('haulDistance');
             
             const balance = cut - fill;
             const landfillTax = 126.15; // £/tonne (2024 rate)
@@ -625,18 +740,17 @@
             const disposalCost = balance > 0 ? balance * 1.8 * landfillTax : 0;
             const importCost = balance < 0 ? Math.abs(balance) * 25 : 0;
         
-            document.getElementById('earthworksResult').innerHTML = `
-                Site Balance: ${balance} m³<br>
+            setResult('earthworksResult', `
+                Site Balance: ${balance.toFixed(2)} m³<br>
                 Haulage Cost: £${haulCost.toLocaleString()}<br>
                 ${balance > 0 ? `Disposal Cost: £${disposalCost.toLocaleString()}` : `Import Cost: £${importCost.toLocaleString()}`}
-            `;
+            `);
         }
         
-        // Life Cycle Costing
         function calculateLifeCycle() {
-            const initial = parseFloat(document.getElementById('initialCost').value);
-            const years = parseFloat(document.getElementById('lifespan').value);
-            const maintenance = parseFloat(document.getElementById('maintenance').value);
+            const initial = getVal('initialCost');
+            const years = getVal('lifespan');
+            const maintenance = getVal('maintenance');
             const discountRate = 3.5; // UK public sector discount rate
         
             let npv = initial;
@@ -644,46 +758,43 @@
                 npv += maintenance / Math.pow(1 + discountRate/100, y);
             }
         
-            document.getElementById('lifecycleResult').innerHTML = `
-                NPV (${years} years): £${npv.toLocaleString()}<br>
+            setResult('lifecycleResult', `
+                NPV (${years} years): £${npv.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}<br>
                 Carbon Cost: ${(years * 120).toLocaleString()} kgCO₂e<br>
                 (Assumes 120kg/yr carbon impact)
-            `;
+            `);
         }
         
-        // NEC Compensation Calculator
         function calculateNEC() {
-            const duration = parseFloat(document.getElementById('originalDuration').value);
-            const delay = parseFloat(document.getElementById('delayWeeks').value);
-            const costs = parseFloat(document.getElementById('additionalCost').value);
+            const duration = getVal('originalDuration');
+            const delay = getVal('delayWeeks');
+            const costs = getVal('additionalCost');
         
-            const timeImpact = duration * 0.15 < delay ? "EOT Required" : "Within float";
+            const timeImpact = duration > 0 && (delay / duration) > 0.15 ? "EOT Required" : "Within float";
             const costImpact = costs * 1.13; // 13% NEC fee percentage
         
-            document.getElementById('necResult').innerHTML = `
+            setResult('necResult', `
                 Compensation Event Analysis:<br>
                 Time Impact: ${timeImpact}<br>
                 Cost Impact: £${costImpact.toLocaleString()}<br>
                 (Includes 13% fee percentage)
-            `;
+            `);
         }
 
-                // Rainwater Drainage Calculator
         function calculateDrainage() {
-            const area = parseFloat(document.getElementById('roofAreaDrain').value);
-            const rainfall = parseFloat(document.getElementById('rainfall').value);
+            const area = getVal('roofAreaDrain');
+            const rainfall = getVal('rainfall');
             const flowRate = (area * rainfall) / 3600; // l/s
             const pipeSize = flowRate > 3.5 ? "110mm" : "68mm";
-            document.getElementById('drainageResult').innerHTML = `
+            setResult('drainageResult', `
                 Required: ${pipeSize} downpipe<br>
                 Flow rate: ${flowRate.toFixed(2)} l/s
-            `;
+            `);
         }
         
-        // Part L Compliance Checker (2023 Regs)
         function checkPartL() {
-            const wallU = parseFloat(document.getElementById('wallUValue').value);
-            const windowU = parseFloat(document.getElementById('windowUValue').value);
+            const wallU = getVal('wallUValue');
+            const windowU = getVal('windowUValue');
             const wallCompliant = wallU <= 0.26;
             const windowCompliant = windowU <= 1.6;
             
@@ -692,15 +803,17 @@
             if(!windowCompliant) results.push("Window U-value exceeds 1.6 W/m²K");
             
             const resultDiv = document.getElementById('partLResult');
-            resultDiv.innerHTML = results.length > 0 
-                ? `⚠️ Non-compliant: ${results.join('<br>')}`
-                : "✓ Compliant with Part L 2023";
-            resultDiv.style.color = results.length > 0 ? '#e74c3c' : '#2ecc71';
+            if (results.length > 0) {
+                resultDiv.innerHTML = `⚠️ Non-compliant: <br>${results.join('<br>')}`;
+                resultDiv.style.color = '#e74c3c';
+            } else {
+                resultDiv.innerHTML = "✓ Compliant with Part L 2023";
+                resultDiv.style.color = '#2ecc71';
+            }
         }
         
-        // Fire Resistance Calculator (ADB 2020)
         function calculateFireResistance() {
-            const height = parseFloat(document.getElementById('buildingHeight').value);
+            const height = getVal('buildingHeight');
             const type = document.getElementById('buildingType').value;
             let resistance;
             
@@ -710,48 +823,51 @@
                 resistance = height > 30 ? 180 : height > 18 ? 120 : 60;
             }
             
-            document.getElementById('fireResult').innerHTML = `
+            setResult('fireResult', `
                 Required FR: ${resistance} minutes<br>
                 (Approved Document B)
-            `;
+            `);
         }
         
-        // Masonry Calculator (BS EN 1996-1-1)
         function calculateMasonry() {
-            const length = parseFloat(document.getElementById('masonryLength').value);
-            const height = parseFloat(document.getElementById('masonryHeight').value);
+            const length = getVal('masonryLength');
+            const height = getVal('masonryHeight');
             const blockType = document.getElementById('blockType').value;
             const strength = blockType === '7N' ? 7 : 10;
             const capacity = (length * 0.1 * strength * 1000).toFixed(0);
             
-            document.getElementById('masonryResult').innerHTML = `
+            setResult('masonryResult', `
                 Load capacity: ~${capacity} kN<br>
                 (Assuming 100mm thick wall)
-            `;
+            `);
         }
         
-        // Plant Hire Calculator
         function calculatePlantHire() {
             const plant = document.getElementById('plantType').value;
-            const days = parseFloat(document.getElementById('hireDays').value);
+            const days = getVal('hireDays');
             const rates = {
                 excavator: { daily: 180, fuel: 40 },
                 dumper: { daily: 75, fuel: 20 }
             };
             const total = days * (rates[plant].daily + rates[plant].fuel);
             
-            document.getElementById('plantResult').innerHTML = `
+            setResult('plantResult', `
                 Total cost: £${total.toFixed(0)}<br>
                 (Incl. fuel & operator)
-            `;
+            `);
         }
 
-                // Ladder Angle Calculator (1:4 rule)
         function calculateLadderAngle() {
-            const height = parseFloat(document.getElementById('ladderHeight').value);
-            const base = parseFloat(document.getElementById('baseDistance').value);
-            const ratio = base / height;
+            const height = getVal('ladderHeight');
+            const base = getVal('baseDistance');
             const resultDiv = document.getElementById('ladderResult');
+
+            if (height === 0) {
+                resultDiv.innerHTML = 'Please enter a ladder height.';
+                resultDiv.style.color = '#e74c3c';
+                return;
+            }
+            const ratio = base / height;
             
             let message = "";
             if (ratio >= 0.24 && ratio <= 0.26) { // 1:4 ratio (75°)
@@ -764,27 +880,32 @@
             resultDiv.innerHTML = message;
         }
         
-        // Screed Calculator
         function calculateScreed() {
-            const area = parseFloat(document.getElementById('screedArea').value);
-            const thickness = parseFloat(document.getElementById('screedThickness').value) / 1000;
+            const area = getVal('screedArea');
+            const thickness = getVal('screedThickness') / 1000;
             const volume = area * thickness;
-            const bags = Math.ceil(volume * 1.8); // 1.8 bags/m³
-            document.getElementById('screedResult').innerHTML = `
+            const bags = Math.ceil(volume / (25 / 2200)); // 2200 kg/m3 density, 25kg bags
+            setResult('screedResult', `
                 ${volume.toFixed(2)} m³ required<br>
-                ${bags} bags (25kg each) needed
-            `;
+                Approx. ${bags} bags (25kg each) needed
+            `);
         }
         
-        // Noise Assessment (HSE guidelines)
         function calculateNoise() {
-            const dB = parseFloat(document.getElementById('noiseLevel').value);
-            const hours = parseFloat(document.getElementById('exposureTime').value);
-            const limit = 87 - (10 * Math.log10(hours));
-            
+            const dB = getVal('noiseLevel');
+            const hours = getVal('exposureTime');
             const resultDiv = document.getElementById('noiseResult');
+
+            if (hours === 0) {
+                resultDiv.innerHTML = 'Please enter an exposure time.';
+                resultDiv.style.color = '#e74c3c';
+                return;
+            }
+
+            const limit = 87 - (10 * Math.log10(hours/8)); // Relative to 8 hour exposure
+            
             if(dB > limit) {
-                resultDiv.innerHTML = `⚠️ Over limit (${limit.toFixed(1)} dB) - PPE required`;
+                resultDiv.innerHTML = `⚠️ Over limit for this duration (${limit.toFixed(1)} dB) - PPE required`;
                 resultDiv.style.color = '#e74c3c';
             } else {
                 resultDiv.innerHTML = "✓ Within safe limits";
@@ -792,18 +913,6 @@
             }
         }
         
-        // 4. Ventilation Calculator (Approved Document F)
-        function calculateVentilation() {
-            const volume = parseFloat(document.getElementById('ventVolume').value);
-            const people = parseFloat(document.getElementById('occupants').value);
-            const rate = Math.max(0.5 * people, 0.3 * volume).toFixed(1);
-            document.getElementById('ventResult').innerHTML = `
-                Minimum ventilation rate: ${rate} l/s<br>
-                (Building Regs Part F)
-            `;
-        }
-        
-        // Construction Phase Plan Checker (CDM 2015)
         function checkPlan() {
             const hasRA = document.getElementById('riskAssessment').checked;
             const hasMS = document.getElementById('methodStatement').checked;
@@ -822,6 +931,87 @@
                 resultDiv.innerHTML = "✓ Compliant with CDM 2015";
                 resultDiv.style.color = '#2ecc71';
             }
+        }
+
+        // NEW CALCULATOR FUNCTIONS
+
+        function calculateScaffolding() {
+            const run = getVal('scaffoldRun');
+            const lifts = getVal('scaffoldLifts');
+            const boardedLifts = getVal('boardedLifts');
+            
+            // Simplified estimation logic
+            const standards = Math.ceil(run / 2) * (lifts + 1);
+            const ledgers = Math.ceil(run / 2) * lifts;
+            const transoms = Math.ceil(run / 1.2) * lifts;
+            const boards = Math.ceil(run / 0.225) * boardedLifts;
+
+            setResult('scaffoldResult', `
+                <strong>Estimated Materials:</strong><br>
+                - Standards: ${standards}<br>
+                - Ledgers: ${ledgers}<br>
+                - Transoms/Putlogs: ${transoms}<br>
+                - Boards: ${boards}
+            `);
+        }
+
+        function calculateGroundwork() {
+            const length = getVal('trenchLength');
+            const width = getVal('trenchWidth');
+            const depth = getVal('trenchDepth');
+            
+            const volume = length * width * depth;
+            const muckAway = volume * 1.3; // Bulking factor
+
+            setResult('groundworkResult', `
+                Excavation Volume: ${volume.toFixed(2)} m³<br>
+                Muck Away Volume: ${muckAway.toFixed(2)} m³ (loose)
+            `);
+        }
+
+        function calculateDaywork() {
+            const labour = getVal('labourCost');
+            const material = getVal('materialCost');
+            const overhead = getVal('overheadPercentage');
+            
+            const subTotal = labour + material;
+            const total = subTotal * (1 + overhead / 100);
+
+            setResult('dayworkResult', `
+                Sub-Total (Labour + Materials): £${subTotal.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}<br>
+                <strong>Total with ${overhead}% O&P: £${total.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</strong>
+            `);
+        }
+
+        function calculateProfitLoss() {
+            const contractValue = getVal('contractValue');
+            const estimatedCosts = getVal('estimatedCosts');
+            const costsToDate = getVal('costsToDate');
+
+            const originalProfit = contractValue - estimatedCosts;
+            const currentProfit = contractValue - costsToDate;
+
+            setResult('profitLossResult', `
+                Original Forecast Profit: £${originalProfit.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}<br>
+                Current Forecast Profit: £${currentProfit.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}
+            `);
+        }
+
+        function generateFinalAccount() {
+            const contractSum = getVal('originalContractSum');
+            const variations = getVal('netVariations');
+            const payments = getVal('paymentsReceived');
+
+            const adjustedSum = contractSum + variations;
+            const finalBalance = adjustedSum - payments;
+
+            setResult('finalAccountResult', `
+                Original Sum: £${contractSum.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}<br>
+                Net Variations: £${variations.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}<br>
+                <strong>Adjusted Sum: £${adjustedSum.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</strong><br>
+                Payments Received: £${payments.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}<br>
+                <strong>Final Balance Due: £${finalBalance.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</strong>
+            `);
         }
     </script>
 </body>
