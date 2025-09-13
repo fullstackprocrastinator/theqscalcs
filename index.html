@@ -533,6 +533,25 @@
                 <button class="btn" onclick="generateFinalAccount()">Generate Statement</button>
                 <div class="result" id="finalAccountResult"></div>
             </div>
+            
+            <!-- NEW: Add/Omit Calculator -->
+            <div class="calculator">
+                <h2>Add/Omit Calculator</h2>
+                <div class="input-group">
+                    <label for="originalContractValue">Original Contract Value (£)</label>
+                    <input type="number" id="originalContractValue">
+                </div>
+                <div class="input-group">
+                    <label for="additionsValue">Value of Additions (£)</label>
+                    <input type="number" id="additionsValue">
+                </div>
+                <div class="input-group">
+                    <label for="omissionsValue">Value of Omissions (£)</label>
+                    <input type="number" id="omissionsValue">
+                </div>
+                <button class="btn" onclick="calculateAddOmit()">Calculate Adjusted Value</button>
+                <div class="result" id="addOmitResult"></div>
+            </div>
 
         </div>
     </main>
@@ -568,7 +587,7 @@
 
             setResult('stairResult', 
                 `Risers: ${numberOfRisers} @ ${actualRiserHeight.toFixed(1)}mm<br>
-                 Treads: ${numberOfTreads} (recommended 250-300mm)`);
+                Treads: ${numberOfTreads} (recommended 250-300mm)`);
         }
 
         function calculateLoad() {
@@ -980,6 +999,21 @@
                 <strong>Adjusted Sum: £${adjustedSum.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</strong><br>
                 Payments Received: £${payments.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}<br>
                 <strong>Final Balance Due: £${finalBalance.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</strong>
+            `);
+        }
+        
+        function calculateAddOmit() {
+            const originalValue = getVal('originalContractValue');
+            const additions = getVal('additionsValue');
+            const omissions = getVal('omissionsValue');
+
+            const adjustedValue = originalValue + additions - omissions;
+
+            setResult('addOmitResult', `
+                Original Value: £${originalValue.toLocaleString()}<br>
+                Additions: £${additions.toLocaleString()}<br>
+                Omissions: -£${omissions.toLocaleString()}<br>
+                <strong>Adjusted Contract Value: £${adjustedValue.toLocaleString()}</strong>
             `);
         }
     </script>
